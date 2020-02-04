@@ -1,1 +1,29 @@
-<p>overview works!</p>
+<div class="header">
+  <div>进行中的赛事</div>
+  <div>
+    <a href="">全部赛事</a>
+  </div>
+</div>
+<div class="matchList">
+  <div class="match" *ngFor="let item of topMatch">
+    <div>
+      <nz-avatar nzSize="small" nzIcon="user"></nz-avatar>
+      <span>{{item.title}}</span>
+    </div>
+    <div>
+      <span>{{item.introduce}}</span>
+    </div>
+    <div class="people">
+      <div>{{item.author}}</div>
+      <div>{{item.time | date:"yyyy/MM/dd"}}</div>
+    </div>
+  </div>
+</div>
+<div class="dynamic">
+  <div class="dynamicHeader">
+    <span>动态</span>
+  </div>
+  <div class="item" *ngFor="let item of dynamicList">
+    {{item.content}}
+  </div>
+</div>

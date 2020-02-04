@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 20px;
+  background-color: #fff;
+}
+
+.matchList {
+  font-size: 0;
+}
+
+.match {
+  background-color: #fff;
+  border: 1px solid #f1f2f5;
+  display: inline-block;
+  padding: 20px;
+  width: 33.33%;
+  font-size: 12px;
+  .title {
+    font-size: 12px;
+  }
+}
+
+.people {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dynamic {
+  .dynamicHeader {
+    background-color: #fff;
+    margin-top: 15px;
+    padding: 20px;
+    border: 1px solid #f1f2f5;
+  }
+
+  .item {
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #f1f2f5;
+  }
+}

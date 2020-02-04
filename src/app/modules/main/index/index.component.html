@@ -2,6 +2,10 @@
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <li nz-menu-item [nzSelected]="true">
+        <i nz-icon nzTitle="overview" nzType="bank"></i>
+        <span>主页</span>
+      </li>
       <li nz-submenu nzTitle="User" nzIcon="user">
         <ul>
           <li nz-menu-item>Tom</li>
@@ -35,7 +39,7 @@
         <nz-breadcrumb-item>User</nz-breadcrumb-item>
         <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
       </nz-breadcrumb>
-      <div class="inner-content">
+      <div>
         <router-outlet></router-outlet>
       </div>
     </nz-content>
