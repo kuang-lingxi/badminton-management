@@ -2,17 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MainRoutingModule } from './main-routing.module';
-import { IndexComponent } from './index/index.component';
+import { IndexComponent } from './components/index/index.component';
 import { SelfCommonModule } from '../common/common.module';
-import { OverviewComponent } from './components/overview/overview.component';
 
 
 @NgModule({
-  declarations: [IndexComponent, OverviewComponent],
+  declarations: [IndexComponent],
   imports: [
     CommonModule,
-    SelfCommonModule,
-    MainRoutingModule
+    MainRoutingModule,
+    SelfCommonModule
   ]
 })
 export class MainModule { }

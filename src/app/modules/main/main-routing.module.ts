@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IndexComponent } from './index/index.component';
-import { OverviewComponent } from './components/overview/overview.component';
+import { IndexComponent } from './components/index/index.component';
 
 
 const routes: Routes = [
@@ -11,7 +10,11 @@ const routes: Routes = [
     children: [
       {
         path: 'overview', 
-        component: OverviewComponent
+        loadChildren: () => import('./overview/overview.module').then(m => m.OverviewModule)
+      },
+      {
+        path: 'match',
+        loadChildren: () => import('./match/match.module').then(m => m.MatchModule)
       }
     ]
   }
