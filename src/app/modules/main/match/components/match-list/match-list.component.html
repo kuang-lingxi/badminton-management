@@ -1,1 +1,62 @@
-<p>match-list works!</p>
+<div class="content">
+  <form class="mb-20" nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label>比赛名称</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your username!">
+        <input formControlName="matchName" nz-input placeholder="请输入比赛名称" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>状态</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your Password!">
+        <nz-select name="select-validate" formControlName="status">
+          <nz-option [nzValue]="matchStatus.waitBegin" nzLabel="待开始"></nz-option>
+          <nz-option [nzValue]="matchStatus.enrolling" nzLabel="报名中"></nz-option>
+          <nz-option [nzValue]="matchStatus.enrollEnd" nzLabel="报名截止"></nz-option>
+          <nz-option [nzValue]="matchStatus.matching" nzLabel="比赛中"></nz-option>
+          <nz-option [nzValue]="matchStatus.numMax" nzLabel="人数已满"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary">搜索</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <nz-table 
+    [nzData] = "matchData" 
+    [nzPageSize]="pageSize" 
+    [nzPageIndex]="pageIndex" 
+    [nzShowPagination]="true" 
+    [nzTotal]="total"
+    [nzShowSizeChanger]="true"
+    [nzShowQuickJumper]="true"
+    [nzFrontPagination]="false"
+  >
+    <thead>
+      <tr>
+        <th>赛事名称</th>
+        <th>简介</th>
+        <th>参与人数</th>
+        <th>状态</th>
+        <th>报名截止时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of matchData">
+        <td>{{data.name}}</td>
+        <td>{{data.introduce}}</td>
+        <td>{{data.people}}</td>
+        <td>{{formatMatchStatus(data.status)}}</td>
+        <td>{{data.endTime | date:"yyyy/MM/dd hh:mm:ss"}}</td>
+        <td>
+          <span class="operate">编辑</span>
+          <span class="operate">删除</span>
+          <span class="operate">截止</span>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
