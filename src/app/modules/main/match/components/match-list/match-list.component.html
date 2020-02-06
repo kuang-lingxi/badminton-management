@@ -46,7 +46,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of matchData">
-        <td>{{data.name}}</td>
+        <td [routerLink] = "['/main/match/list', data.id]" class="link">{{data.name}}</td>
         <td>{{data.introduce}}</td>
         <td>{{data.people}}</td>
         <td>{{formatMatchStatus(data.status)}}</td>

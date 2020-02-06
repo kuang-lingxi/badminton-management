@@ -1,0 +1,31 @@
+.introduce {
+  display: flex;
+  justify-content: space-around;
+}
+
+.block {
+  background-color: #fff;
+  padding: 20px;
+  width: 23%;
+  height: 150px;
+}
+
+.rule {
+  margin:20px; 
+  .ruleDetail {
+    display: flex;
+    justify-content: space-between;
+  }
+  .show {
+    background-color: #fff;
+    padding: 20px;
+    width: 49%;
+    height: 200px;
+  }
+}
+
+.people {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+}
