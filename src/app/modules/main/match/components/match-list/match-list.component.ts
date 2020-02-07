@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { matchStatusEnum } from '../../data/match-status.enum';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { MatchModalComponent } from '../match-modal/match-modal.component';
 
 @Component({
   selector: 'app-match-list',
@@ -32,7 +34,8 @@ export class MatchListComponent implements OnInit {
   ]
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private modalService: NzModalService
   ) {
     
   }
@@ -63,4 +66,10 @@ export class MatchListComponent implements OnInit {
     }
   }
 
+  newMatch() {
+    const modal = this.modalService.create({
+      nzTitle: "新增赛事",
+      nzContent: MatchModalComponent
+    })
+  }
 }

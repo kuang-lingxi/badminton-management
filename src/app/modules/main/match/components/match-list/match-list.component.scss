@@ -1,6 +1,7 @@
 .content {
-  padding: 20px;
   background-color: #fff;
+  padding: 20px;
+  position: relative;
 }
 
 .mb-20 {
@@ -16,4 +17,10 @@
 .link {
   cursor: pointer;
   color: #81b5ef;
+}
+
+.new {
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
