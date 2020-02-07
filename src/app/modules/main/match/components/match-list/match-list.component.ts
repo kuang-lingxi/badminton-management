@@ -20,6 +20,18 @@ export class MatchListComponent implements OnInit {
 
   matchStatus: any = matchStatusEnum;
 
+  matchInfo: any = {
+    name: '3v3趣味赛',
+    introduce: '这是介绍',
+    prize: '这是奖励',
+    address: '这是比赛地址',
+    rangePickerTime: [1581061754633, 1581063754633],
+    limit: "1",
+    limitPeople:["0", "1", "2"],
+    referee: 1,
+    maxNum:1
+  }
+
   matchData: any = [
     {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 0, endTime: 1580808088000},
     {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 1, endTime: 1580808088000},
@@ -69,7 +81,19 @@ export class MatchListComponent implements OnInit {
   newMatch() {
     const modal = this.modalService.create({
       nzTitle: "新增赛事",
-      nzContent: MatchModalComponent
+      nzContent: MatchModalComponent,
+      nzWidth: 700,
+      nzFooter: null
+    })
+  }
+
+  open() {
+    const modal = this.modalService.create({
+      nzTitle: "修改赛事",
+      nzContent: MatchModalComponent,
+      nzWidth: 700,
+      nzFooter: null,
+      nzComponentParams: {'matchInfo': this.matchInfo}
     })
   }
 }
