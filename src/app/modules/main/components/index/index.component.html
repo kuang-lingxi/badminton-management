@@ -3,25 +3,33 @@
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-menu-item [nzSelected]="true">
-        <i nz-icon nzTitle="overview" nzType="bank"></i>
+        <i nz-icon nzTitle="overview" nzType="home"></i>
         <span>主页</span>
       </li>
       <li nz-submenu nzTitle="赛事管理" nzIcon="appstore">
         <ul>
           <li nz-menu-item routerLink="match/list">赛事列表</li>
-          <li nz-menu-item>新建赛事</li>
-          <li nz-menu-item>Alex</li>
         </ul>
       </li>
       <li nz-submenu nzTitle="人员管理" nzIcon="team">
         <ul>
           <li nz-menu-item routerLink="people/list">人员列表</li>
-          <li nz-menu-item>Team 2</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="审核" nzIcon="thunderbolt">
+        <ul>
+          <li nz-menu-item routerLink="people/list">裁判审核</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="通知" nzIcon="notification">
+        <ul>
+          <li nz-menu-item routerLink="people/list">发布通知</li>
+          <li nz-menu-item routerLink="people/list">查看通知</li>
         </ul>
       </li>
       <li nz-menu-item>
-        <i nz-icon nzType="file"></i>
-        <span>File</span>
+        <i nz-icon nzType="frown"></i>
+        <span>反馈收集</span>
       </li>
     </ul>
   </nz-sider>

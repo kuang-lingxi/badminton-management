@@ -1,0 +1,28 @@
+.content {
+  align-items: center;
+  border-bottom: 1px solid #efefef;
+  display: flex;
+  justify-content: space-between;
+  margin-left: -10px;
+  margin-right: -10px;
+  padding: 10px;
+
+  .user {
+    display: flex;
+  }
+}
+.edit {
+  display: inline-block;
+  border-right: 1px solid #efefef;
+  padding: 5px;
+  color: #1890ff;
+  cursor: pointer;
+}
+
+.message {
+  margin-left: 10px;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}

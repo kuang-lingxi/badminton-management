@@ -1,0 +1,36 @@
+<div class="content">
+  <div class="user">
+    <nz-avatar [nzShape]="'square'" [nzSize]="'large'" [nzIcon]="'user'"></nz-avatar>
+    <div class="message">
+      <div>{{name}}</div>
+      <div>{{introduce}}</div>
+    </div>
+  </div>
+  
+  <div>
+    <span>学号: 2016014372</span>
+    <span class="ml-10">级别: A+</span>
+    <span class="ml-10">裁判认证: 是</span>
+  </div>
+
+  <div>
+    <div>个人信息完整度</div>
+  </div>
+
+  <div class="operate">
+    <span class="edit">查看</span>
+    <a nz-dropdown [nzDropdownMenu]="menu">
+      更多
+      <i nz-icon nzType="down"></i>
+    </a>
+  </div>
+</div>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzSelectable>
+    <li nz-menu-item>禁止登陆</li>
+    <li nz-menu-item>禁止参赛</li>
+    <li nz-menu-item>授权为管理员</li>
+    <li nz-menu-item>修改密码</li>
+  </ul>
+</nz-dropdown-menu>

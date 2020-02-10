@@ -1,1 +1,57 @@
-<p>people-list works!</p>
+<div class="header">
+  <div>
+    <div>总人数</div>
+    <div>89人</div>
+  </div>
+  <div>
+    <div>认证裁判人数</div>
+    <div>20人</div>
+  </div>
+  <div>
+    <div>会员数</div>
+    <div>28人</div>
+  </div>
+</div>
+<div class="list">
+  <div class="top">
+    <div class="title">人员列表</div>
+    <div class="choose">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm">
+        <nz-form-item>
+          <nz-form-control>
+            <nz-select formControlName="level" nzPlaceHolder="choose" [nzDropdownMatchSelectWidth]="false">
+              <nz-option [nzValue]="0" nzLabel="全部"></nz-option>
+              <nz-option [nzValue]="1" nzLabel="非会员"></nz-option>
+              <nz-option [nzValue]="2" nzLabel="会员"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item >
+
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group [nzSuffix]="suffixIconSearch">
+              <input formControlName="search" type="text" nz-input placeholder="input search text" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+      
+    </div>
+  </div>
+  <div class="content">
+    <app-people-item
+      *ngFor="let people of peopleList"
+      [name] = "people.name"
+      [introduce] = "people.introduce"
+    >
+    </app-people-item>
+
+    <div class="pagination">
+      <nz-pagination [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" [nzTotal]="total" nzShowQuickJumper nzShowSizeChanger></nz-pagination>
+    </div>
+  </div>
+</div>
+
+<ng-template #suffixIconSearch>
+  <i nz-icon nzType="search"></i>
+</ng-template>
