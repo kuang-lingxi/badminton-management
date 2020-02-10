@@ -1,1 +1,70 @@
-<p>people-detail works!</p>
+<div class="content">
+  <h3>用户信息</h3>
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">姓名</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <input nz-input formControlName="name" id="name" [disabled]="forbidEdit"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone">联系电话</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <input nz-input formControlName="phone" id="phone" [disabled]="forbidEdit"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone">自我介绍</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <textarea formControlName="introduce" nz-input rows="2" placeholder="write any thing" [disabled]="forbidEdit"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone">会员</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <nz-select formControlName="member" [nzDisabled]="forbidEdit">
+          <nz-option [nzValue]="0" nzLabel="非会员"></nz-option>
+          <nz-option [nzValue]="1" nzLabel="会员"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone">裁判</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <nz-select formControlName="referee" [nzDisabled]="forbidEdit">
+          <nz-option [nzValue]="0" nzLabel="非裁判"></nz-option>
+          <nz-option [nzValue]="1" nzLabel="裁判"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone">管理员</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <nz-select formControlName="referee" [nzDisabled]="forbidEdit">
+          <nz-option [nzValue]="0" nzLabel="非管理员"></nz-option>
+          <nz-option [nzValue]="1" nzLabel="管理员"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="grade">积分</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <input nz-input formControlName="grade" id="grade" [disabled]="forbidEdit"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row>
+      <nz-form-control [nzSpan]="14" [nzOffset]="12">
+        <button class="button" nz-button nzType="primary" (click)="edit()" *ngIf="forbidEdit">编辑</button>
+        <button class="button" nz-button nzType="primary"  *ngIf="!forbidEdit">提交</button>
+        <button class="button" nz-button nzType="primary" (click)="reset()">重置</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
