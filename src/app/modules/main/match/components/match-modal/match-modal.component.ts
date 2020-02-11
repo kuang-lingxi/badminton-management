@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NzModalRef } from 'ng-zorro-antd/modal'
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-match-modal',

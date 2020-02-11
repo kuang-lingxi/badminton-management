@@ -1,0 +1,36 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="clearfix">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      标题
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="title">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      内容
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <textarea formControlName="content" nz-input rows="2" placeholder="write any thing"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      是否置顶
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select formControlName="top">
+        <nz-option [nzValue]="0" nzLabel="不置顶"></nz-option>
+        <nz-option [nzValue]="1" nzLabel="置顶"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="footer">
+    <button nz-button nzType="primary" class="btn">确定</button>
+    <button nz-button nzType="default" class="btn" (click)="cancel()">取消</button>
+  </div>
+</form>
