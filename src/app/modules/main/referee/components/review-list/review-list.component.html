@@ -1,1 +1,43 @@
-<p>review-list works!</p>
+<div class="content">
+  <form class="mb-20" nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label>用户名</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your username!">
+        <input formControlName="username" nz-input placeholder="请输入通知名称" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary">搜索</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <nz-table 
+    [nzData] = "reviewList" 
+    [nzPageSize]="pageSize" 
+    [nzPageIndex]="pageIndex" 
+    [nzShowPagination]="true" 
+    [nzTotal]="total"
+    [nzShowSizeChanger]="true"
+    [nzShowQuickJumper]="true"
+    [nzFrontPagination]="false"
+    #reviewTable
+  >
+    <thead>
+      <tr>
+        <th>用户名</th>
+        <th>申请时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of reviewTable.data">
+        <td>{{data.username}}</td>
+        <td>{{data.time | date:"yyyy/MM/dd hh:mm:ss"}}</td>
+        <td>
+          <span class="operate" (click)="edit()">查看</span>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
