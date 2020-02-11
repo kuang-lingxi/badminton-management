@@ -27,6 +27,10 @@ const routes: Routes = [
       {
         path: 'referee',
         loadChildren: () => import('./referee/referee.module').then(m => m.RefereeModule)
+      },
+      {
+        path: 'feedback',
+        loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackModule)
       }
     ]
   }
