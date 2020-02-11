@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'notice',
         loadChildren: () => import('./notice/notice.module').then(m => m.NoticeModule)
+      },
+      {
+        path: 'referee',
+        loadChildren: () => import('./referee/referee.module').then(m => m.RefereeModule)
       }
     ]
   }
