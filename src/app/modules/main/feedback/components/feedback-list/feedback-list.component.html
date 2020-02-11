@@ -1,1 +1,55 @@
-<p>feedback-list works!</p>
+<div class="content">
+  <form class="mb-20" nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label>关键字</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your username!">
+        <input formControlName="keywords" nz-input placeholder="请输入通知名称" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>提交时间</nz-form-label>
+      <nz-form-control>
+        <nz-range-picker nzShowTime formControlName="rangePickerTime"></nz-range-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary">搜索</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <nz-table 
+    [nzData] = "feedbackList" 
+    [nzPageSize]="pageSize" 
+    [nzPageIndex]="pageIndex" 
+    [nzShowPagination]="true" 
+    [nzTotal]="total"
+    [nzShowSizeChanger]="true"
+    [nzShowQuickJumper]="true"
+    [nzFrontPagination]="false"
+    #feedbackTable
+  >
+    <thead>
+      <tr>
+        <th>标题</th>
+        <th>内容</th>
+        <th>提交时间</th>
+        <th>提交者</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of feedbackTable.data">
+        <td>{{data.title}}</td>
+        <td>{{data.content}}</td>
+        <td>{{data.time | date:"yyyy/MM/dd hh:mm:ss"}}</td>
+        <td>{{data.user}}</td>
+        <td>
+          <span class="operate" (click)="show()">查看</span>
+          <nz-divider nzType="vertical"></nz-divider>
+          <span class="operate">加入待处理</span>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
-  selector: 'app-review-detail',
-  templateUrl: './review-detail.component.html',
-  styleUrls: ['./review-detail.component.scss']
+  selector: 'app-feedback-detail',
+  templateUrl: './feedback-detail.component.html',
+  styleUrls: ['./feedback-detail.component.scss']
 })
-export class ReviewDetailComponent implements OnInit {
+export class FeedbackDetailComponent implements OnInit {
 
   constructor(
     private modalRef: NzModalRef
