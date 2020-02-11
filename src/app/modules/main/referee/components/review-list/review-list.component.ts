@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { ReviewDetailComponent } from '../review-detail/review-detail.component';
 
 @Component({
   selector: 'app-review-list',
@@ -34,12 +35,22 @@ export class ReviewListComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private modalService: NzModalService
   ) { }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
       username: [null]
     });
+  }
+
+  showDetail() {
+    const modal = this.modalService.create({
+      nzTitle: "查看材料",
+      nzContent: ReviewDetailComponent,
+      nzWidth: 700,
+      nzFooter: null
+    })
   }
 
 }
