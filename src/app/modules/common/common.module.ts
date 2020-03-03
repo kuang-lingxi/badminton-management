@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import {NgxEchartsModule} from 'ngx-echarts';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -16,6 +17,9 @@ import {NgxEchartsModule} from 'ngx-echarts';
     ReactiveFormsModule,
     NgZorroAntdModule,
     NgxEchartsModule
+  ],
+  providers: [
+    CookieService
   ]
 })
 export class SelfCommonModule { }

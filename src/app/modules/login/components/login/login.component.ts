@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from '../service/login.service';
+import { LoginService } from '../../service/login.service';
+import { Response } from '../../../common/data/response'; 
 
 @Component({
   selector: 'app-login',
@@ -32,9 +33,11 @@ export class LoginComponent implements OnInit {
     const userMsg = {
       ...this.validateForm.value
     }
-    console.log(userMsg)
-    this.loginService.login(userMsg.username, userMsg.password).subscribe(res => {
-      console.log(res);
+
+    this.loginService.login(userMsg.username, userMsg.password, userMsg.remember).subscribe(response => {
+      if(response.code === 0) {
+        this.loginService.setToken(response.message.token, userMsg.remember);
+      }
     })
   }
 
