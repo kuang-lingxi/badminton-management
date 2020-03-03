@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
+import { httpInterceptorProviders } from './intercept/index';
+import { CookieService } from 'ngx-cookie-service';
 
 registerLocaleData(zh);
 
@@ -24,7 +26,11 @@ registerLocaleData(zh);
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [
+    { provide: NZ_I18N, useValue: zh_CN },
+    httpInterceptorProviders,
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

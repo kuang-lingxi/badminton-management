@@ -18,7 +18,7 @@ export class LoginService {
       password,
       remember
     }
-    return this.http.post<Response>("http://localhost:8080/api/user/login", params);
+    return this.http.post<Response>("api/user/login", params);
   }
 
   setToken(token: string, remember: boolean) {

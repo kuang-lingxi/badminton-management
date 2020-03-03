@@ -36,7 +36,9 @@ export class LoginComponent implements OnInit {
 
     this.loginService.login(userMsg.username, userMsg.password, userMsg.remember).subscribe(response => {
       if(response.code === 0) {
-        this.loginService.setToken(response.message.token, userMsg.remember);
+        if(response.message.result) {
+          this.loginService.setToken(response.message.token, userMsg.remember);
+        }
       }
     })
   }
