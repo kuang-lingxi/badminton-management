@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       if(response.code === 0) {
         if(response.message.result) {
           this.loginService.setToken(response.message.token, userMsg.remember);
-          this.router.navigateByUrl("/main/overview");w
+          this.router.navigateByUrl("/main/overview");
         }else {
           this.nzMessageService.create('error', '用户名或密码错误');
         }
