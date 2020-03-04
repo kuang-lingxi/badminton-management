@@ -8,14 +8,14 @@
   <div class="match" *ngFor="let item of topMatch">
     <div>
       <nz-avatar nzSize="small" nzIcon="user"></nz-avatar>
-      <span>{{item.title}}</span>
+      <span class="title">{{item.title}}</span>
     </div>
     <div>
-      <span>{{item.introduce}}</span>
+      <span class="introduce">{{item.introduce}}</span>
     </div>
     <div class="people">
-      <div>{{item.author}}</div>
-      <div>{{item.time | date:"yyyy/MM/dd"}}</div>
+      <div class="author">{{item.author}}</div>
+      <div class="time">{{item.time | date:"yyyy/MM/dd"}}</div>
     </div>
   </div>
 </div>

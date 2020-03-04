@@ -41,3 +41,23 @@
     border: 1px solid #f1f2f5;
   }
 }
+
+.title {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.introduce {
+  display: inline-block;
+  overflow: hidden;
+  margin:5px auto;
+  color: #b0b0b0;
+}
+
+.author {
+  color: #6bb4ff;
+}
+
+.time {
+  color: #cbcbcb;
+}

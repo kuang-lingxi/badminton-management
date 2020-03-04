@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { MatchService } from '../../service/match.service';
 
 @Component({
   selector: 'app-match-modal',
@@ -17,7 +18,8 @@ export class MatchModalComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private modalRef: NzModalRef
+    private modalRef: NzModalRef,
+    private matchService: MatchService
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +36,7 @@ export class MatchModalComponent implements OnInit {
     });                                                                                                                                           
 
     if(this.matchInfo) {
-      if(this.matchInfo !== 0) {
+      if(this.matchInfo.limit !== 0) {
         this.showLimit = true;
       }
       this.validateForm.patchValue({'limit': this.matchInfo.limit});
@@ -47,16 +49,23 @@ export class MatchModalComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
 
-    console.log(this.validateForm.value);
+    let reqMsg = {
+      ...this.validateForm.value,
+      actualPlayer: 0,
+      actualReferee: 0,
+      hintCount: 0,
+      begTime: this.validateForm.value.rangePickerTime[0].getTime(),
+      endTime: this.validateForm.value.rangePickerTime[1].getTime()
+    }
+
+    this.matchService.insertMatch(reqMsg).subscribe(response => {
+      console.log(response);
+    })
   }
 
   updateConfirmValidator(): void {
     /** wait for refresh value */
     Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
-  }
-
-  getCaptcha(e: MouseEvent): void {
-    e.preventDefault();
   }
 
   cancel() {

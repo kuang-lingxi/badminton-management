@@ -6,6 +6,7 @@ import { SelfCommonModule } from '../../common/common.module';
 import { MatchListComponent } from './components/match-list/match-list.component';
 import { MatchDetailComponent } from './components/match-detail/match-detail.component';
 import { MatchModalComponent } from './components/match-modal/match-modal.component';
+import { MatchService } from './service/match.service';
 
 
 @NgModule({
@@ -14,6 +15,9 @@ import { MatchModalComponent } from './components/match-modal/match-modal.compon
     CommonModule,
     MatchRoutingModule,
     SelfCommonModule
+  ],
+  providers: [
+    MatchService
   ],
   entryComponents: [MatchModalComponent]
 })
