@@ -63,17 +63,7 @@
     </nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-select formControlName="limitPeople" nzMode="multiple">
-        <nz-option nzValue="0" nzLabel="男生"></nz-option>
-        <nz-option nzValue="1" nzLabel="女生"></nz-option>
-        <nz-option nzValue="2" nzLabel="会员"></nz-option>
-        <nz-option nzValue="3" nzLabel="非会员"></nz-option>
-        <nz-option nzValue="4" nzLabel="A+"></nz-option>
-        <nz-option nzValue="5" nzLabel="A"></nz-option>
-        <nz-option nzValue="6" nzLabel="B+"></nz-option>
-        <nz-option nzValue="7" nzLabel="B"></nz-option>
-        <nz-option nzValue="8" nzLabel="C+"></nz-option>
-        <nz-option nzValue="9" nzLabel="C"></nz-option>
-        <nz-option nzValue="10" nzLabel="D"></nz-option>
+        <nz-option *ngFor="let item of type" [nzValue]="item.type" [nzLabel]="item.text"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>

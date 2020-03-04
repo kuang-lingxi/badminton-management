@@ -16,6 +16,8 @@ export class MatchModalComponent implements OnInit {
 
   showLimit: boolean = false;
 
+  type: any = []
+
   constructor(
     private fb: FormBuilder,
     private modalRef: NzModalRef,
@@ -41,6 +43,12 @@ export class MatchModalComponent implements OnInit {
       }
       this.validateForm.patchValue({'limit': this.matchInfo.limit});
     }
+
+    this.matchService.getType().subscribe(response => {
+      if(response.code === 0) {
+        this.type = response.message.result;
+      }
+    })
   }
 
   submitForm(): void {
@@ -55,7 +63,8 @@ export class MatchModalComponent implements OnInit {
       actualReferee: 0,
       hintCount: 0,
       begTime: this.validateForm.value.rangePickerTime[0].getTime(),
-      endTime: this.validateForm.value.rangePickerTime[1].getTime()
+      endTime: this.validateForm.value.rangePickerTime[1].getTime(),
+      limitPeople: this.validateForm.value.limitPeople ? this.validateForm.value.limitPeople.join("-") : null
     }
 
     this.matchService.insertMatch(reqMsg).subscribe(response => {

@@ -14,4 +14,8 @@ export class MatchService {
     return this.http.post<Response>("api/match/add", match);
   }
 
+  getType(): Observable<Response> {
+    return this.http.get<Response>("api/type/list");
+  }
+
 }
