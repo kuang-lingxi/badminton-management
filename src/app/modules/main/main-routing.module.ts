@@ -10,27 +10,27 @@ const routes: Routes = [
     children: [
       {
         path: 'overview', 
-        loadChildren: () => import('./overview/overview.module').then(m => m.OverviewModule)
+        loadChildren: () => import('./overview/overview.module').then(m => m.OverviewModule),
       },
       {
         path: 'match',
-        loadChildren: () => import('./match/match.module').then(m => m.MatchModule)
+        loadChildren: () => import('./match/match.module').then(m => m.MatchModule),
       },
       {
         path: 'people',
-        loadChildren: () => import('./people/people.module').then(m => m.PeopleModule)
+        loadChildren: () => import('./people/people.module').then(m => m.PeopleModule),
       },
       {
         path: 'notice',
-        loadChildren: () => import('./notice/notice.module').then(m => m.NoticeModule)
+        loadChildren: () => import('./notice/notice.module').then(m => m.NoticeModule),
       },
       {
         path: 'referee',
-        loadChildren: () => import('./referee/referee.module').then(m => m.RefereeModule)
+        loadChildren: () => import('./referee/referee.module').then(m => m.RefereeModule),
       },
       {
         path: 'feedback',
-        loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackModule)
+        loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackModule),
       }
     ]
   }

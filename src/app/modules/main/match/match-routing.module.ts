@@ -7,11 +7,17 @@ import { MatchDetailComponent } from './components/match-detail/match-detail.com
 const routes: Routes = [
   {
     path: 'list',
-    component: MatchListComponent
+    component: MatchListComponent,
+    data: {
+      breadcrumb: "list"
+    }
   },
   {
     path: 'list/:id',
-    component: MatchDetailComponent
+    component: MatchDetailComponent,
+    data: {
+      breadcrumb: "detail"
+    }
   }
 ];
 
