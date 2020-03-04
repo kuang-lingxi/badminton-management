@@ -34,7 +34,8 @@ export class MatchModalComponent implements OnInit {
       limit: [null, [Validators.required]],
       limitPeople: [this.matchInfo && [...this.matchInfo.limitPeople], [Validators.required]],
       referee: [this.matchInfo && this.matchInfo.referee, [Validators.required]],
-      maxNum: [this.matchInfo && this.matchInfo.maxNum, [Validators.required]]
+      player: [this.matchInfo && this.matchInfo.maxNum, [Validators.required]],
+      time: [this.matchInfo && this.matchInfo.time, [Validators.required]]
     });                                                                                                                                           
 
     if(this.matchInfo) {
@@ -64,11 +65,15 @@ export class MatchModalComponent implements OnInit {
       hintCount: 0,
       begTime: this.validateForm.value.rangePickerTime[0].getTime(),
       endTime: this.validateForm.value.rangePickerTime[1].getTime(),
-      limitPeople: this.validateForm.value.limitPeople ? this.validateForm.value.limitPeople.join("-") : null
+      limitPeople: this.validateForm.value.limitPeople ? this.validateForm.value.limitPeople.join("-") : null,
+      time: this.validateForm.value.time.getTime(),
+      status: 0
     }
 
     this.matchService.insertMatch(reqMsg).subscribe(response => {
-      console.log(response);
+      if(response.message.result) {
+        this.modalRef.close();
+      }
     })
   }
 
@@ -77,7 +82,8 @@ export class MatchModalComponent implements OnInit {
     Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
   }
 
-  cancel() {
+  cancel(e) {
+    e.preventDefault();
     this.modalRef.close();
   }
 

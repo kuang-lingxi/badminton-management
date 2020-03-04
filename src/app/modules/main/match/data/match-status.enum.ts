@@ -1,7 +1,7 @@
 export enum matchStatusEnum {
-  waitBegin = 0,
-  enrolling = 1,
-  enrollEnd = 2,
-  matching = 3,
-  numMax = 4
+  enrolling = 0,
+  enrollEnd = 1,
+  matching = 2,
+  numMax = 3,
+  end = 4
 }

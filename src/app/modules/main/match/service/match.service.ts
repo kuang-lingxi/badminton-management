@@ -18,4 +18,8 @@ export class MatchService {
     return this.http.get<Response>("api/type/list");
   }
 
+  getMatchList(status: number, pageSize: number, pageIndex:number, keywords: string = ""): Observable<Response> {
+    return this.http.get<Response>(`api/match/list?status=${status}&pageSize=${pageSize}&pageIndex=${pageIndex}&keywords=${keywords}`);
+  }
+
 }

@@ -3,6 +3,7 @@ import { matchStatusEnum } from '../../data/match-status.enum';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { MatchModalComponent } from '../match-modal/match-modal.component';
+import { MatchService } from '../../service/match.service';
 
 @Component({
   selector: 'app-match-list',
@@ -33,43 +34,50 @@ export class MatchListComponent implements OnInit {
   }
 
   matchData: any = [
-    {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 0, endTime: 1580808088000},
-    {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 1, endTime: 1580808088000},
-    {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 2, endTime: 1580808088000},
-    {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 3, endTime: 1580808088000},
-    {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 4, endTime: 1580808088000},
-    {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 5, endTime: 1580808088000},
-    {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 0, endTime: 1580808088000},
-    {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 0, endTime: 1580808088000},
-    {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 0, endTime: 1580808088000},
-    {id: 1, name: '3v3趣味赛', introduce: '这是一段简介', people: 20, status: 0, endTime: 1580808088000}
+    
   ]
 
   constructor(
     private fb: FormBuilder,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private matchService: MatchService
   ) {
     
   }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      matchName: [null, [Validators.required]],
-      status: [this.matchStatus.enrolling, [Validators.required]],
+      matchName: [""],
+      status: [this.matchStatus.enrolling],
     });
+
+    this.matchService.getMatchList(0, this.pageSize, this.pageIndex, "").subscribe(response => {
+      if(response.code === 0) {
+        this.total = response.message.total;
+        this.matchData = response.message.matchList;
+      }
+    })
   }
 
   submitForm(): void {
-    const data = {
-      ...this.validateForm.value
-    }
+    this.matchService.getMatchList(parseInt(this.validateForm.value.status), this.pageSize, this.pageIndex, this.validateForm.value.matchName).subscribe(response => {
+      if(response.code === 0) {
+        this.total = response.message.total;
+        this.matchData = response.message.matchList;
+      }
+    })
+  }
 
-    console.log(data);
+  clear(e) {
+    e.preventDefault();
+    this.validateForm.patchValue({matchName: ""});
+    this.validateForm.patchValue({status:0});
+    this.update();
   }
 
   formatMatchStatus(status) {
     switch(status) {
-      case this.matchStatus.waitBegin: return "待开启";
+      case this.matchStatus.end: return "已结束";
       case this.matchStatus.enrolling: return "报名中";
       case this.matchStatus.enrollEnd: return "报名截止";
       case this.matchStatus.matching: return "比赛中";
@@ -94,6 +102,23 @@ export class MatchListComponent implements OnInit {
       nzWidth: 700,
       nzFooter: null,
       nzComponentParams: {'matchInfo': this.matchInfo}
+    })
+  }
+
+  pageIndexChange() {
+    this.update();
+  }
+
+  pageSizeChange() {
+    this.update();
+  }
+
+  update() {
+    this.matchService.getMatchList(parseInt(this.validateForm.value.status), this.pageSize, this.pageIndex, this.validateForm.value.matchName).subscribe(response => {
+      if(response.code === 0) {
+        this.total = response.message.total;
+        this.matchData = response.message.matchList;
+      }
     })
   }
 }
