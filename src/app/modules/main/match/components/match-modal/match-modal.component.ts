@@ -34,7 +34,7 @@ export class MatchModalComponent implements OnInit {
       limit: [null, [Validators.required]],
       limitPeople: [this.matchInfo && [...this.matchInfo.limitPeople], [Validators.required]],
       referee: [this.matchInfo && this.matchInfo.referee, [Validators.required]],
-      player: [this.matchInfo && this.matchInfo.maxNum, [Validators.required]],
+      player: [this.matchInfo && this.matchInfo.player, [Validators.required]],
       time: [this.matchInfo && this.matchInfo.time, [Validators.required]]
     });                                                                                                                                           
 
@@ -88,7 +88,7 @@ export class MatchModalComponent implements OnInit {
   }
 
   selectChange(value) {
-    if(parseInt(value) !== 0) {
+    if(value !== 0) {
       this.showLimit = true;
     }else {
       this.showLimit = false;

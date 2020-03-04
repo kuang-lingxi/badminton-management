@@ -65,7 +65,7 @@
         <td>{{formatMatchStatus(data.status)}}</td>
         <td>{{data.time | date:"yyyy/MM/dd hh:mm:ss"}}</td>
         <td>
-          <span class="operate" (click)="open()">编辑</span>
+          <span class="operate" (click)="open(data.id)">编辑</span>
           <span class="operate">删除</span>
           <span class="operate">截止</span>
         </td>

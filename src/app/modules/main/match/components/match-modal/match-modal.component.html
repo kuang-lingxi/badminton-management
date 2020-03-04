@@ -63,9 +63,9 @@
     </nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-select formControlName="limit" (ngModelChange)="selectChange($event)">
-        <nz-option [nzValue]="'0'" nzLabel="无限制"></nz-option>
-        <nz-option [nzValue]="'1'" nzLabel="限制可参与人员"></nz-option>
-        <nz-option [nzValue]="'2'" nzLabel="限制不可参与人员"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="无限制"></nz-option>
+        <nz-option [nzValue]="1" nzLabel="限制可参与人员"></nz-option>
+        <nz-option [nzValue]="2" nzLabel="限制不可参与人员"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>

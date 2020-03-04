@@ -22,4 +22,8 @@ export class MatchService {
     return this.http.get<Response>(`api/match/list?status=${status}&pageSize=${pageSize}&pageIndex=${pageIndex}&keywords=${keywords}`);
   }
 
+  getMatchById(id: number): Observable<Response> {
+    return  this.http.get<Response>(`api/match/detail?id=${id}`);
+  }
+
 }

@@ -95,14 +95,26 @@ export class MatchListComponent implements OnInit {
     })
   }
 
-  open() {
-    const modal = this.modalService.create({
-      nzTitle: "修改赛事",
-      nzContent: MatchModalComponent,
-      nzWidth: 700,
-      nzFooter: null,
-      nzComponentParams: {'matchInfo': this.matchInfo}
+  open(id) {
+    this.matchService.getMatchById(id).subscribe(response => {
+      if(response.code === 0) {
+        const detail = response.message.detail;
+        this.matchInfo = {
+          ...detail,
+          rangePickerTime: [parseInt(detail.begTime), parseInt(detail.endTime)],
+          time: parseInt(detail.time),
+          limitPeople: detail.limitPeople ? detail.limitPeople.split("-") : []
+        }
+        const modal = this.modalService.create({
+          nzTitle: "修改赛事",
+          nzContent: MatchModalComponent,
+          nzWidth: 700,
+          nzFooter: null,
+          nzComponentParams: {'matchInfo': this.matchInfo}
+        })
+      }
     })
+    
   }
 
   pageIndexChange() {
