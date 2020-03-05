@@ -20,6 +20,8 @@ export class MatchModalComponent implements OnInit {
 
   showTeamUpLimit: boolean = false;
 
+  isUpdate = false;
+
   constructor(
     private fb: FormBuilder,
     private modalRef: NzModalRef,
@@ -37,12 +39,13 @@ export class MatchModalComponent implements OnInit {
       limitPeople: [this.matchInfo && [...this.matchInfo.limitPeople], [Validators.required]],
       referee: [this.matchInfo && this.matchInfo.referee, [Validators.required]],
       player: [this.matchInfo && this.matchInfo.player, [Validators.required]],
-      time: [this.matchInfo && this.matchInfo.time, [Validators.required]],
+      time: [this.matchInfo && new Date(this.matchInfo.time), [Validators.required]],
       isTeamUp: [null, [Validators.required]],
       teamUpLimit: [this.matchInfo && this.matchInfo.teamUpLimit]
     });                                                                                                                                           
 
     if(this.matchInfo) {
+      this.isUpdate = true;
       if(this.matchInfo.limit !== 0) {
         this.showLimit = true;
       }
@@ -68,7 +71,6 @@ export class MatchModalComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-
     let reqMsg = {
       ...this.validateForm.value,
       actualPlayer: 0,
@@ -79,14 +81,23 @@ export class MatchModalComponent implements OnInit {
       limitPeople: this.validateForm.value.limitPeople ? this.validateForm.value.limitPeople.join("-") : null,
       time: this.validateForm.value.time.getTime(),
       status: 0,
-      enterId: null
+      enterId: null,
+      id: this.matchInfo.id
     }
 
-    this.matchService.insertMatch(reqMsg).subscribe(response => {
-      if(response.message.result) {
-        this.modalRef.close();
-      }
-    })
+    if(this.isUpdate) {
+      this.matchService.updateMatch(reqMsg).subscribe(response => {
+        if(response.message.result) {
+          this.modalRef.close(true);
+        }
+      })
+    }else {
+      this.matchService.insertMatch(reqMsg).subscribe(response => {
+        if(response.message.result) {
+          this.modalRef.close(true);
+        }
+      })
+    }
   }
 
   updateConfirmValidator(): void {
@@ -96,7 +107,7 @@ export class MatchModalComponent implements OnInit {
 
   cancel(e) {
     e.preventDefault();
-    this.modalRef.close();
+    this.modalRef.close(false);
   }
 
   selectChange(value) {

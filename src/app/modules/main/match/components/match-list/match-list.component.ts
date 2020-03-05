@@ -112,6 +112,12 @@ export class MatchListComponent implements OnInit {
           nzFooter: null,
           nzComponentParams: {'matchInfo': this.matchInfo}
         })
+
+        modal.afterClose.subscribe(resp => {
+          if(resp) {
+            this.update();
+          }
+        })
       }
     })
     
