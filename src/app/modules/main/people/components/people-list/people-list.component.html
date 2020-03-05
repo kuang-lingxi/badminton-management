@@ -1,15 +1,24 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/main/overview']">main</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    user
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+
 <div class="header">
   <div>
     <div>总人数</div>
-    <div>89人</div>
+    <div>{{peopleNum}}人</div>
   </div>
   <div>
     <div>认证裁判人数</div>
-    <div>20人</div>
+    <div>{{refereeNum}}人</div>
   </div>
   <div>
     <div>会员数</div>
-    <div>28人</div>
+    <div>{{memberNum}}人</div>
   </div>
 </div>
 <div class="list">
@@ -20,9 +29,9 @@
         <nz-form-item>
           <nz-form-control>
             <nz-select formControlName="level" nzPlaceHolder="choose" [nzDropdownMatchSelectWidth]="false">
-              <nz-option [nzValue]="0" nzLabel="全部"></nz-option>
-              <nz-option [nzValue]="1" nzLabel="非会员"></nz-option>
-              <nz-option [nzValue]="2" nzLabel="会员"></nz-option>
+              <nz-option [nzValue]="2" nzLabel="全部"></nz-option>
+              <nz-option [nzValue]="0" nzLabel="非会员"></nz-option>
+              <nz-option [nzValue]="1" nzLabel="会员"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item >
@@ -47,7 +56,15 @@
     </app-people-item>
 
     <div class="pagination">
-      <nz-pagination [nzPageSize]="pageSize" [nzPageIndex]="pageIndex" [nzTotal]="total" nzShowQuickJumper nzShowSizeChanger></nz-pagination>
+      <nz-pagination 
+        [(nzPageSize)]="pageSize" 
+        [(nzPageIndex)]="pageIndex" 
+        [nzTotal]="total" 
+        nzShowQuickJumper 
+        nzShowSizeChanger
+        (nzPageIndexChange)="pageIndexChange()"
+        (nzPageSizeChange)="pageSizeChange()"
+      ></nz-pagination>
     </div>
   </div>
 </div>

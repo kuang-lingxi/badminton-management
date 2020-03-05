@@ -1,5 +1,5 @@
 <div class="content">
-  <div class="user">
+  <div class="user grow1">
     <nz-avatar [nzShape]="'square'" [nzSize]="'large'" [nzIcon]="'user'"></nz-avatar>
     <div class="message">
       <div>{{name}}</div>
@@ -7,17 +7,18 @@
     </div>
   </div>
   
-  <div>
+  <div class="grow1">
     <span>学号: 2016014372</span>
     <span class="ml-10">级别: A+</span>
     <span class="ml-10">裁判认证: 是</span>
   </div>
 
-  <div>
+  <div class="grow2">
     <div>个人信息完整度</div>
+    <nz-progress [nzPercent]="30" [nzFormat]=""></nz-progress>
   </div>
 
-  <div class="operate">
+  <div class="operate grow1">
     <span class="edit" [routerLink]="['/main/people/list', 1]">查看</span>
     <a nz-dropdown [nzDropdownMenu]="menu">
       更多

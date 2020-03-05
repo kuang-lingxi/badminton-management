@@ -2,7 +2,7 @@
   align-items: center;
   border-bottom: 1px solid #efefef;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   margin-left: -10px;
   margin-right: -10px;
   padding: 10px;
@@ -25,4 +25,15 @@
 
 .ml-10 {
   margin-left: 10px;
+}
+
+.grow1 {
+  flex-grow: 1;
+}
+.grow2 {
+  flex-grow: 2;
+}
+
+.operate {
+  text-align: right;
 }
