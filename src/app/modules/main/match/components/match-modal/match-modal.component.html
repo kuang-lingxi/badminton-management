@@ -70,6 +70,27 @@
     </nz-form-control>
   </nz-form-item>
 
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      是否组队
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select formControlName="isTeamUp" (ngModelChange)="teamUpChange($event)">
+        <nz-option [nzValue]="0" nzLabel="否"></nz-option>
+        <nz-option [nzValue]="1" nzLabel="是"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="showTeamUpLimit">
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      队伍人数
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-input-number formControlName="teamUpLimit" [nzMin]="1" [nzStep]="1"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
   <nz-form-item *ngIf="showLimit">
     <nz-form-label [nzSm]="6" [nzXs]="24">
       限制人员

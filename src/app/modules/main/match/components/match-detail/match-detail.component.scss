@@ -8,6 +8,8 @@
   padding: 20px;
   width: 23%;
   height: 150px;
+
+  position: relative;
 }
 
 .rule {
@@ -32,4 +34,28 @@
 
 nz-breadcrumb {
   margin: 16px 0;
+}
+
+.title {
+  color: #a4a4a4;
+  font-size: 10px;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.ml-15 {
+  margin-left: 15px;
+}
+
+.click {
+  font-size: 30px;
+}
+
+.footer {
+  position: absolute;
+  width: 90%;
+  bottom: 10px;
 }

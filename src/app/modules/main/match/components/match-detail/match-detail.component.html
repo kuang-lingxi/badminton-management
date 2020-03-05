@@ -1,79 +1,93 @@
-<nz-breadcrumb>
-  <nz-breadcrumb-item>
-    <a [routerLink]="['/main/overview']">main</a>
-  </nz-breadcrumb-item>
-  <nz-breadcrumb-item>
-    <a [routerLink]="['/main/match/list']">list</a>
-  </nz-breadcrumb-item>
-  <nz-breadcrumb-item>
-    detail
-  </nz-breadcrumb-item>
-</nz-breadcrumb>
-
-<div class="introduce">
-  <div class="block">
-    <div>
-      <span>当前最热赛事</span>
+<div *ngIf="matchInfo">
+  <nz-breadcrumb>
+    <nz-breadcrumb-item>
+      <a [routerLink]="['/main/overview']">main</a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      <a [routerLink]="['/main/match/list']">list</a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      detail
+    </nz-breadcrumb-item>
+  </nz-breadcrumb>
+  
+  <div class="introduce">
+    <div class="block">
+      <div>
+        <span class="title">当前赛事</span>
+      </div>
+      <div>
+        <span class="name">{{matchInfo.name}}</span>
+      </div>
+      <div style="margin-top: 10px;">
+        <i nz-icon [nzType]="'man'"></i>：12人
+        <i nz-icon [nzType]="'woman'" class="ml-15"></i>：12人
+      </div>
+      <div class="footer">
+        <hr>
+        <span>参赛总人数：{{matchInfo.actualPlayer}}人</span>
+      </div>
     </div>
-    <div>
-      <span>3v3趣味赛</span>
+  
+    <div class="block">
+      <div>
+        <span class="title">当前赛事浏览量</span>
+      </div>
+      <div class="click">{{matchInfo.hintCount}}</div>
+      <div class="footer">
+        <hr>
+        <span>热度排序：3</span>
+      </div>
     </div>
-    <div>
-      <span>男生人数：12人</span>
-      <span>女生人数：11人</span>
+  
+    <div class="block">
+      <div>
+        <span class="title">赛事限制</span>
+      </div>
+      <div style="margin-top: 10px;"><span class="name">{{limit(matchInfo.limit)}}</span></div>
+      <div class="footer">
+        <hr>
+        <span>限制分组：{{limitGroup()}}</span>
+      </div>
     </div>
+  
+    <div class="block">
+      <div><span>裁判招募</span></div>
+      <div style="font-weight: bold;margin-top: 10px;">
+        <span>{{matchInfo.actualReferee}}/{{matchInfo.referee}}</span>
+        <nz-progress [nzPercent]="matchInfo.actualReferee/matchInfo.referee*100" [nzFormat]="percentFormat"></nz-progress>
+      </div>
+      <div class="footer">
+        <hr>
+        <span>暂缺：{{matchInfo.referee - matchInfo.actualReferee}}人</span>
+      </div>
+    </div>
+  </div>
+  <div class="rule">
+    <h3>赛事规则</h3>
     <hr>
-    <div>
-      <span>参赛总人数：23人</span>
+    <div class="ruleDetail">
+      <div class="show">
+        <h5>计分策略</h5>
+        <span></span>
+        <h5>赛事奖励</h5>
+        <span></span>
+        <h5>赛事积分</h5>
+        <span></span>
+      </div>
+      <div class="show">
+        <h5>开始时间</h5>
+        <span></span>
+        <h5>限制参赛人数</h5>
+        <span></span>
+        <h5>比赛场地</h5>
+        <span></span>
+      </div>
     </div>
   </div>
-
-  <div class="block">
-    <div>
-      <span>当前赛事浏览量</span>
-    </div>
-    <div>1000</div>
-  </div>
-
-  <div class="block">
-    <div>
-      <span>赛事限制</span>
-    </div>
-    <div><span>全员开放</span></div>
-    <div><span>限制分组：无</span></div>
-  </div>
-
-  <div class="block">
-    <div><span>裁判招募</span></div>
-    <div><span>7/10</span></div>
+  <div class="people">
+    <h2>参赛人员等级比例</h2>
     <hr>
-    <div><span>暂缺：3人</span></div>
+    <div echarts [options]="peopleOption"></div>
   </div>
-</div>
-<div class="rule">
-  <h3>赛事规则</h3>
-  <hr>
-  <div class="ruleDetail">
-    <div class="show">
-      <h5>计分策略</h5>
-      <span></span>
-      <h5>赛事奖励</h5>
-      <span></span>
-      <h5>赛事积分</h5>
-      <span></span>
-    </div>
-    <div class="show">
-      <h5>开始时间</h5>
-      <span></span>
-      <h5>限制参赛人数</h5>
-      <span></span>
-      <h5>比赛场地</h5>
-      <span></span>
-    </div>
-  </div>
-</div>
-<div class="people">
-  <h2>参赛人员等级比例</h2>
-  <hr>
-  <div echarts [options]="peopleOption"></div>
 </div>

@@ -16,7 +16,9 @@ export class MatchModalComponent implements OnInit {
 
   showLimit: boolean = false;
 
-  type: any = []
+  type: any = [];
+
+  showTeamUpLimit: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,14 +37,23 @@ export class MatchModalComponent implements OnInit {
       limitPeople: [this.matchInfo && [...this.matchInfo.limitPeople], [Validators.required]],
       referee: [this.matchInfo && this.matchInfo.referee, [Validators.required]],
       player: [this.matchInfo && this.matchInfo.player, [Validators.required]],
-      time: [this.matchInfo && this.matchInfo.time, [Validators.required]]
+      time: [this.matchInfo && this.matchInfo.time, [Validators.required]],
+      isTeamUp: [null, [Validators.required]],
+      teamUpLimit: [this.matchInfo && this.matchInfo.teamUpLimit]
     });                                                                                                                                           
 
     if(this.matchInfo) {
       if(this.matchInfo.limit !== 0) {
         this.showLimit = true;
       }
+      if(this.matchInfo.teamUpLimit !== 0) {
+        this.showTeamUpLimit = true;
+      }
       this.validateForm.patchValue({'limit': this.matchInfo.limit});
+      this.validateForm.patchValue({'isTeamUp': this.matchInfo.isTeamUp});
+    }else {
+      this.validateForm.patchValue({'limit': 0});
+      this.validateForm.patchValue({'isTeamUp': 0});
     }
 
     this.matchService.getType().subscribe(response => {
@@ -67,7 +78,8 @@ export class MatchModalComponent implements OnInit {
       endTime: this.validateForm.value.rangePickerTime[1].getTime(),
       limitPeople: this.validateForm.value.limitPeople ? this.validateForm.value.limitPeople.join("-") : null,
       time: this.validateForm.value.time.getTime(),
-      status: 0
+      status: 0,
+      enterId: null
     }
 
     this.matchService.insertMatch(reqMsg).subscribe(response => {
@@ -92,6 +104,14 @@ export class MatchModalComponent implements OnInit {
       this.showLimit = true;
     }else {
       this.showLimit = false;
+    }
+  }
+
+  teamUpChange(value) {
+    if(value !== 0) {
+      this.showTeamUpLimit = true;
+    }else {
+      this.showTeamUpLimit = false;
     }
   }
 }
