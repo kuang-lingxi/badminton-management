@@ -1,3 +1,12 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/main/overview']">main</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    user
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+
 <div class="content">
   <form class="mb-20" nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item>

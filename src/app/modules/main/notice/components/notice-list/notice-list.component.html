@@ -1,3 +1,12 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/main/overview']">main</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    notice
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+
 <div class="content">
   <button nz-button nzType="primary" class="new" (click)="newNotice()">发布通知</button>
   <form class="mb-20" nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
@@ -21,13 +30,15 @@
   </form>
   <nz-table 
     [nzData] = "noticeData" 
-    [nzPageSize]="pageSize" 
-    [nzPageIndex]="pageIndex" 
+    [(nzPageSize)]="pageSize" 
+    [(nzPageIndex)]="pageIndex" 
     [nzShowPagination]="true" 
     [nzTotal]="total"
     [nzShowSizeChanger]="true"
     [nzShowQuickJumper]="true"
     [nzFrontPagination]="false"
+    (nzPageIndexChange)="pageIndexChange()"
+    (nzPageSizeChange)="pageSizeChange()"
     #noticeTable
   >
     <thead>
@@ -45,7 +56,7 @@
         <td>{{data.title}}</td>
         <td>{{data.content}}</td>
         <td>{{data.time | date:"yyyy/MM/dd hh:mm:ss"}}</td>
-        <td>{{data.publisher}}</td>
+        <td>{{data.promulgator}}</td>
         <td>{{data.top === 0 ? '否' : '是'}}</td>
         <td>
           <span class="operate" (click)="edit()">编辑</span>

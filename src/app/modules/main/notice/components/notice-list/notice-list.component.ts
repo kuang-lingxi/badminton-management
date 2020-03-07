@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { NoticeModalComponent } from '../notice-modal/notice-modal.component';
+import { NoticeService } from '../../service/notice.service';
 
 @Component({
   selector: 'app-notice-list',
@@ -25,21 +26,13 @@ export class NoticeListComponent implements OnInit {
   }
 
   noticeData: any = [
-    {id: 0, title: '这是第一条通知', content: '这是通知的内容', time: 1580808088000, top: 1, publisher: 'klx'},
-    {id: 0, title: '这是第一条通知', content: '这是通知的内容', time: 1580808088000, top: 1, publisher: 'klx'},
-    {id: 0, title: '这是第一条通知', content: '这是通知的内容', time: 1580808088000, top: 0, publisher: 'klx'},
-    {id: 0, title: '这是第一条通知', content: '这是通知的内容', time: 1580808088000, top: 0, publisher: 'klx'},
-    {id: 0, title: '这是第一条通知', content: '这是通知的内容', time: 1580808088000, top: 0, publisher: 'klx'},
-    {id: 0, title: '这是第一条通知', content: '这是通知的内容', time: 1580808088000, top: 0, publisher: 'klx'},
-    {id: 0, title: '这是第一条通知', content: '这是通知的内容', time: 1580808088000, top: 0, publisher: 'klx'},
-    {id: 0, title: '这是第一条通知', content: '这是通知的内容', time: 1580808088000, top: 0, publisher: 'klx'},
-    {id: 0, title: '这是第一条通知', content: '这是通知的内容', time: 1580808088000, top: 0, publisher: 'klx'},
-    {id: 0, title: '这是第一条通知', content: '这是通知的内容', time: 1580808088000, top: 0, publisher: 'klx'}
+    
   ]
 
   constructor(
     private fb: FormBuilder,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private noticeService: NoticeService
   ) { }
 
   ngOnInit() {
@@ -47,6 +40,7 @@ export class NoticeListComponent implements OnInit {
       title: [null],
       rangePickerTime: [null]
     });
+    this.update();
   }
 
   newNotice() {
@@ -65,6 +59,23 @@ export class NoticeListComponent implements OnInit {
       nzWidth: 700,
       nzFooter: null,
       nzComponentParams: {noticeInfo: this.noticeInfo}
+    })
+  }
+
+  pageIndexChange() {
+    this.update();
+  }
+ 
+  pageSizeChange() {
+    this.update();
+  }
+
+  update() {
+    this.noticeService.getNotice(this.pageSize, this.pageIndex).subscribe(resp => {
+      if(resp.code === 0) {
+        this.total = resp.message.total;
+        this.noticeData = resp.message.notice;
+      }
     })
   }
 

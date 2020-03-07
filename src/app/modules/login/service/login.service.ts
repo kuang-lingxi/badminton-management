@@ -21,11 +21,11 @@ export class LoginService {
     return this.http.post<Response>("api/user/login", params);
   }
 
-  setToken(token: string, remember: boolean) {
+  setCookie(key: string, value: string, remember: boolean = false) {
     if(remember) {
-      this.cookieService.set("access_token", token, 7 * 24 * 60 * 60 * 1000);
+      this.cookieService.set(key, value, 7 * 24 * 60 * 60 * 1000);
     }else {
-      this.cookieService.set("access_token", token);
+      this.cookieService.set(key, value);
     }
   }
 }

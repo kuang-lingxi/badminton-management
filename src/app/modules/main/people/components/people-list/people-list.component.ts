@@ -12,16 +12,7 @@ export class PeopleListComponent implements OnInit {
   validateForm: FormGroup;
 
   peopleList: any = [
-    {id: 1, imgUrl: '', name: '匡凌熙', introduce: '这是个人介绍'},
-    {id: 2, imgUrl: '', name: '匡凌熙', introduce: '这是个人介绍'},
-    {id: 3, imgUrl: '', name: '匡凌熙', introduce: '这是个人介绍'},
-    {id: 4, imgUrl: '', name: '匡凌熙', introduce: '这是个人介绍'},
-    {id: 5, imgUrl: '', name: '匡凌熙', introduce: '这是个人介绍'},
-    {id: 1, imgUrl: '', name: '匡凌熙', introduce: '这是个人介绍'},
-    {id: 2, imgUrl: '', name: '匡凌熙', introduce: '这是个人介绍'},
-    {id: 3, imgUrl: '', name: '匡凌熙', introduce: '这是个人介绍'},
-    {id: 4, imgUrl: '', name: '匡凌熙', introduce: '这是个人介绍'},
-    {id: 5, imgUrl: '', name: '匡凌熙', introduce: '这是个人介绍'}
+    
   ]
 
   pageIndex: number = 1;

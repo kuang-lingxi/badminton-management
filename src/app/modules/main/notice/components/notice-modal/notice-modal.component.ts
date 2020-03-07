@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal'
+import { NoticeService } from '../../service/notice.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-notice-modal',
@@ -16,7 +18,9 @@ export class NoticeModalComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private modalRef: NzModalRef
+    private modalRef: NzModalRef,
+    private noticeService: NoticeService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
@@ -31,12 +35,22 @@ export class NoticeModalComponent implements OnInit {
     }
   }
 
-  cancel() {
-    this.modalRef.close();
+  cancel(e) {
+    e.preventDefault();
+    this.modalRef.close(false);
   }
 
   submitForm() {
-    console.log(this.validateForm.value);
+    const title = this.validateForm.value.title;
+    const content = this.validateForm.value.content;
+    const top = this.validateForm.value.top;
+    const time = new Date().getTime() + "";
+    const promulgator = this.cookieService.get("username");
+    this.noticeService.insertNotice(title, content, promulgator, top, time).subscribe(resp => {
+      if(resp) {
+        this.modalRef.close(true);
+      }
+    });
   }
 
 }
