@@ -18,6 +18,10 @@ const routes: Routes = [
     data: {
       breadcrumb: "main"
     }
+  },
+  {
+    path: 'enroll',
+    loadChildren: () => import('./modules/enroll/enroll.module').then(m => m.EnrollModule)
   }
 ];
 
