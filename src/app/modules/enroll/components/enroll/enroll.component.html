@@ -1,1 +1,43 @@
-<p>enroll works!</p>
+<div *ngIf="matchInfo">
+  <header style="text-align: center;">
+    <h3>赛事报名：{{matchInfo.name}}</h3>
+  </header>
+  
+  <form *ngIf="matchInfo.isTeamUp" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">队伍名称</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="队伍名称不能为空">
+          <input nz-input formControlName="name" id="email" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item *ngFor="let item of formList">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="schoolNumber">
+        参赛者{{item+1}}学号
+        <span *ngIf="item === 0">(默认队长)</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input [formControlName]="item" [id]="item + ''" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control style="text-align: center;">
+        <button nz-button nzType="primary">确定</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  
+  <form *ngIf="!matchInfo.isTeamUp" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="schoolNumber">参赛者学号</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <input nz-input formControlName="schoolNumber" id="schoolNumber" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control style="text-align: center;">
+        <button nz-button nzType="primary">确定</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>

@@ -82,7 +82,7 @@ export class MatchModalComponent implements OnInit {
       time: this.validateForm.value.time.getTime(),
       status: 0,
       enterId: null,
-      id: this.matchInfo.id
+      id: this.matchInfo && this.matchInfo.id
     }
 
     if(this.isUpdate) {

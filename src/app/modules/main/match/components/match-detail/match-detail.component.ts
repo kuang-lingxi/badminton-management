@@ -90,7 +90,7 @@ export class MatchDetailComponent implements OnInit {
   }
 
   limitGroup() {
-		if(this.matchInfo) {
+		if(this.matchInfo && this.matchInfo.isLimitUp) {
 			const limitPeople = this.matchInfo.limitPeople.split("-");
 			let text = [];
 			limitPeople.forEach(item => {

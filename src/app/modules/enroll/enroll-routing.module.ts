@@ -5,7 +5,7 @@ import { EnrollComponent } from './components/enroll/enroll.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component:EnrollComponent
   }
 ];
