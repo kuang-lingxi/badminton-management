@@ -15,4 +15,13 @@ export class EnrollService {
   getMatch(id: number): Observable<Response> {
     return this.http.get<Response>(`api/match/detail?id=${id}`);
   }
+
+  joinTeamMatch(id: number, name: string, userList: string): Observable<Response> {
+    const params = {
+      id,
+      name,
+      userList
+    }
+    return this.http.post<Response>('api/match/joinTeamMatch', params);
+  }
 }

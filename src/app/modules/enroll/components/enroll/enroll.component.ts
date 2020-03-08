@@ -54,11 +54,30 @@ export class EnrollComponent implements OnInit {
   }
 
   submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
+    if(this.matchInfo.isTeamUp) {
+      for (const i in this.validateForm.controls) {
+        this.validateForm.controls[i].clearAsyncValidators();
+        this.validateForm.controls[i].markAsDirty();
+        this.validateForm.controls[i].updateValueAndValidity();
+      }
+      let formVal = [];
+      for(let i of this.formList) {
+        formVal.push(this.validateForm.value[i+""]);
+      }
+      this.enrollService.joinTeamMatch(this.matchInfo.id, this.validateForm.value.name, formVal.join("-")).subscribe(resp => {
+        if(resp.code === 0) {
+          if(resp.message.result) {
+            this.location.back();
+          }
+        }
+      })
+    }else {
+      for (const i in this.validateForm.controls) {
+        this.validateForm.controls[i].markAsDirty();
+        this.validateForm.controls[i].updateValueAndValidity();
+      }
     }
-    console.log(this.validateForm.value);
+    
     // this.goBack();
   }
 
