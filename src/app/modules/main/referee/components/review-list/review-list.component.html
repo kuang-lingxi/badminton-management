@@ -27,6 +27,7 @@
       <tr>
         <th>用户名</th>
         <th>申请时间</th>
+        <th>申请理由</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -34,8 +35,9 @@
       <tr *ngFor="let data of reviewTable.data">
         <td>{{data.username}}</td>
         <td>{{data.time | date:"yyyy/MM/dd hh:mm:ss"}}</td>
+        <td>{{data.text}}</td>
         <td>
-          <span class="operate" (click)="showDetail()">查看材料</span>
+          <span class="operate" (click)="showDetail(data.img)">查看材料</span>
         </td>
       </tr>
     </tbody>

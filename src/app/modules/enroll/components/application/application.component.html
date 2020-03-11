@@ -1,0 +1,35 @@
+<div style="text-align: center;">
+  <h3>裁判认证申请</h3>
+  <form nz-form style="margin: 0 10px;">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24">裁判证(小于2MB)</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-upload
+          class="avatar-uploader"
+          nzName="avatar"
+          nzListType="picture-card"
+          [(nzFileList)]="fileList" 
+          [nzBeforeUpload]="beforeUpload"
+          [nzShowUploadList]="false"
+        >
+          <ng-container *ngIf="!avatarUrl">
+            <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+            <div class="ant-upload-text">Upload</div>
+          </ng-container>
+          <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar" />
+        </nz-upload>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24">申请理由</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <textarea nz-input name="value" [(ngModel)]="value" [nzAutosize]="{ minRows: 2, maxRows: 20 }"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button class="login-form-button" [nzType]="'primary'" (click)="handleUpload()">提交</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>

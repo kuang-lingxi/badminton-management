@@ -38,7 +38,6 @@ export class EnrollComponent implements OnInit {
     })
     this.id = parseInt(this.router.snapshot.paramMap.get("id"));
     this.schoolNumber = this.router.snapshot.queryParamMap.get("schoolNumber");
-    console.log(this.schoolNumber);
     this.enrollService.getMatch(this.id).subscribe(resp => {
       if(resp.code === 0) {
         this.matchInfo = resp.message.detail;
