@@ -4,6 +4,7 @@ import { EnrollService } from '../../service/enroll.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-enroll',
@@ -26,22 +27,24 @@ export class EnrollComponent implements OnInit {
      private fb: FormBuilder,
      private enrollService: EnrollService,
      private router: ActivatedRoute,
-     private location: Location
+     private location: Location,
+     private nzMessageService: NzMessageService,
   ) { }
 
   ngOnInit() {
     // this.enrollService.getMatch()
     this.validateForm = this.fb.group({
-      schoolNumber: ["", Validators.required]
+      schoolNumber: ["", Validators.required, [this.isExited, this.isForbid]]
     })
     this.id = parseInt(this.router.snapshot.paramMap.get("id"));
     this.schoolNumber = this.router.snapshot.queryParamMap.get("schoolNumber");
+    console.log(this.schoolNumber);
     this.enrollService.getMatch(this.id).subscribe(resp => {
       if(resp.code === 0) {
-        if(!resp.message.detail.isTeamUp && this,this.schoolNumber !== null) {
-          this.location.back();
+        this.matchInfo = resp.message.detail;
+        if(!resp.message.detail.isTeamUp && this.schoolNumber !== null) {
+          this.validateForm.patchValue({schoolNumber: this.schoolNumber});
         }else {
-          this.matchInfo = resp.message.detail;
           this.validateForm.addControl("name", new FormControl("", Validators.required));
           for(let i = 0; i < this.matchInfo.teamUpLimit; i++) {
             this.validateForm.addControl(i+"", new FormControl("", Validators.required, [this.isExited, this.isForbid]))
@@ -50,7 +53,6 @@ export class EnrollComponent implements OnInit {
         }
       }
     })
-    
   }
 
   submitForm(): void {
@@ -67,18 +69,26 @@ export class EnrollComponent implements OnInit {
       this.enrollService.joinTeamMatch(this.matchInfo.id, this.validateForm.value.name, formVal.join("-")).subscribe(resp => {
         if(resp.code === 0) {
           if(resp.message.result) {
-            this.location.back();
+            this.goBack();
           }
         }
       })
     }else {
       for (const i in this.validateForm.controls) {
+        this.validateForm.controls[i].clearAsyncValidators();
         this.validateForm.controls[i].markAsDirty();
         this.validateForm.controls[i].updateValueAndValidity();
       }
+      this.enrollService.joinMatch(this.matchInfo.id, this.validateForm.value.schoolNumber).subscribe(resp => {
+        if(resp.code === 0) {
+          if(resp.message.result) {
+            this.goBack();
+          }
+        }else {
+          this.nzMessageService.create('error', '报名失败，请重试');
+        }
+      })
     }
-    
-    // this.goBack();
   }
 
   isForbid = () => {
@@ -104,7 +114,7 @@ export class EnrollComponent implements OnInit {
   goBack() {
     const state: any = this.location.getState();
     if(state.navigationId === 1) {
-      // this.location.go("https://www.baidu.com/");
+      window.location.href = "http://localhost:4200"
     }else {
       this.location.back();
     }

@@ -24,4 +24,12 @@ export class EnrollService {
     }
     return this.http.post<Response>('api/match/joinTeamMatch', params);
   }
+
+  joinMatch(id: number, schoolNumber: string): Observable<Response> {
+    const params = {
+      id,
+      schoolNumber
+    }
+    return this.http.post<Response>("api/match/joinMatch", params);
+  }
 }
