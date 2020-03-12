@@ -33,13 +33,13 @@ export class EnrollService {
     return this.http.post<Response>("api/match/joinMatch", params);
   }
 
-  referee(uid: number, time: string, text: string, img: string) {
+  referee(uid: number, time: string, text: string, img: string): Observable<Response> {
     const params = {
       uid,
       time,
       text,
       img
     }
-    return this.http.post("api/referee/insert", params);
+    return this.http.post<Response>("api/referee/insert", params);
   }
 }

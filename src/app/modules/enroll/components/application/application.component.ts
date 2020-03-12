@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { UploadFile } from 'ng-zorro-antd/upload';
 import { EnrollService } from '../../service/enroll.service';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class ApplicationComponent implements OnInit {
     private http: HttpClient, 
     private msg: NzMessageService,
     private enrollService: EnrollService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -51,7 +53,27 @@ export class ApplicationComponent implements OnInit {
     const time = new Date().getTime() + "";
     this.enrollService.referee(this.uid, time, this.value, this.avatarUrl).subscribe(resp => {
       console.log(resp);
+      if(resp.code === 0) {
+        if(resp.message.result) {
+          this.msg.create("success", "申请成功!")
+          this.goBack(true);
+        }else {
+          this.msg.create("error", "申请失败，请重试");
+        }
+      }else {
+        this.msg.create("error", "申请失败，请重试");
+      }
     });
+  }
+
+  goBack(delay, time = 1000) {
+    if(delay) {
+      setTimeout(() => {
+        this.location.back();
+      }, time);
+    }else {
+      this.location.back();
+    }
   }
 
 }
