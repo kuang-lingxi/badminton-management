@@ -6,10 +6,11 @@ import { EnrollRoutingModule } from './enroll-routing.module';
 import { EnrollComponent } from './components/enroll/enroll.component';
 import { EnrollService } from './service/enroll.service';
 import { ApplicationComponent } from './components/application/application.component';
+import { RefereeComponent } from './components/referee/referee.component';
 
 
 @NgModule({
-  declarations: [EnrollComponent, ApplicationComponent],
+  declarations: [EnrollComponent, ApplicationComponent, RefereeComponent],
   imports: [
     CommonModule,
     EnrollRoutingModule,

@@ -1,0 +1,20 @@
+<div *ngIf="matchInfo">
+  <header style="text-align: center;">
+    <h3>赛事裁判报名：{{matchInfo.name}}</h3>
+  </header>
+  
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="schoolNumber">学号</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <input nz-input formControlName="schoolNumber" id="schoolNumber" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control style="text-align: center;">
+        <button nz-button nzType="primary">确定</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
