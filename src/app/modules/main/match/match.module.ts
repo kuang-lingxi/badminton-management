@@ -7,10 +7,13 @@ import { MatchListComponent } from './components/match-list/match-list.component
 import { MatchDetailComponent } from './components/match-detail/match-detail.component';
 import { MatchModalComponent } from './components/match-modal/match-modal.component';
 import { MatchService } from './service/match.service';
+import { ArrangeComponent } from './components/arrange/arrange.component';
+import { NextModalComponent } from './components/next-modal/next-modal.component';
+import { ArrangeDetailComponent } from './components/arrange-detail/arrange-detail.component';
 
 
 @NgModule({
-  declarations: [MatchListComponent, MatchDetailComponent, MatchModalComponent],
+  declarations: [MatchListComponent, MatchDetailComponent, MatchModalComponent, ArrangeComponent, NextModalComponent, ArrangeDetailComponent],
   imports: [
     CommonModule,
     MatchRoutingModule,
@@ -19,6 +22,6 @@ import { MatchService } from './service/match.service';
   providers: [
     MatchService
   ],
-  entryComponents: [MatchModalComponent]
+  entryComponents: [MatchModalComponent, NextModalComponent]
 })
 export class MatchModule { }

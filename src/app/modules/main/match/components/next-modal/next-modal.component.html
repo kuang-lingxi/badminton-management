@@ -1,0 +1,57 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="clearfix">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      赛事名称
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="name"  >
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      剩余人数
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="nowNum"  >
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      比赛方式
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select formControlName="way" (ngModelChange)="selectChange($event)">
+        <nz-option [nzValue]="0" nzLabel="单淘汰制"></nz-option>
+        <nz-option [nzValue]="1" nzLabel="循环制"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      对阵表编排方式
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select formControlName="way">
+        <nz-option [nzValue]="0" nzLabel="按积分编排"></nz-option>
+        <nz-option [nzValue]="1" nzLabel="随机编排"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="showTeam">
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      每组队伍数
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-input-number formControlName="teamNum" [nzMin]="1" [nzStep]="1"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="footer">
+    <button nz-button nzType="primary" class="btn">确定开启</button>
+    <button nz-button class="btn" (click)="cancel($event)">取消</button>
+  </div>
+</form>

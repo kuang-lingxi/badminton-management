@@ -1,0 +1,48 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/main/overview']">main</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/main/match/arrange']">arrange</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    1
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<div class="content">
+  <nz-table 
+    [nzData] = "arrange" 
+    [nzFrontPagination]="false"
+    #arrangeTable
+  >
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>参赛者1</th>
+        <th>参赛者2</th>
+        <th>比赛场地</th>
+        <th>比赛结果</th>
+        <th>负责裁判</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of arrangeTable.data; let i = index">
+        <td [routerLink] = "['/main/match/list', data.id]" class="link">{{i+1}}</td>
+        <td>{{data.team1}}</td>
+        <td>{{data.team2}}</td>
+        <td>{{data.address}}</td>
+        <td>{{data.result === '' ? '暂无结果' : data.result}}</td>
+        <td>{{data.referee}}</td>
+        <td>
+          <span class="operate" (click)="open(data.id)">修改比赛场地</span>
+          <nz-divider nzType="vertical"></nz-divider>
+          <span class="operate">修改比赛结果</span>
+          <nz-divider nzType="vertical"></nz-divider>
+          <span class="operate">修改对手</span>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
