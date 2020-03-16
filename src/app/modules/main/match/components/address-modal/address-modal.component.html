@@ -1,0 +1,24 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="clearfix">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      原有比赛地址
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="oldAddress">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      比赛地址修改
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="nowAddress">
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="footer">
+    <button nz-button nzType="primary" class="btn">确定</button>
+    <button nz-button class="btn" (click)="cancel($event)">取消</button>
+  </div>
+</form>

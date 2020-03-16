@@ -1,0 +1,42 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="clearfix">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      牛逼的队伍1
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-input-number formControlName="oldTeam1" [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      牛逼的队伍2
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-input-number formControlName="oldTeam2" [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      修改后牛逼的队伍1
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-input-number formControlName="newTeam1" [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      修改后牛逼的队伍2
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-input-number formControlName="newTeam2" [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="footer">
+    <button nz-button nzType="primary" class="btn">确定</button>
+    <button nz-button class="btn" (click)="cancel($event)">取消</button>
+  </div>
+</form>

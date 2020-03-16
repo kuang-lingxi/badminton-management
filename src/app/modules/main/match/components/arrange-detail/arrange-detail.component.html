@@ -36,11 +36,11 @@
         <td>{{data.result === '' ? '暂无结果' : data.result}}</td>
         <td>{{data.referee}}</td>
         <td>
-          <span class="operate" (click)="open(data.id)">修改比赛场地</span>
+          <span class="operate" (click)="address()">修改比赛场地</span>
           <nz-divider nzType="vertical"></nz-divider>
-          <span class="operate">修改比赛结果</span>
+          <span class="operate" (click)="result()">修改比赛结果</span>
           <nz-divider nzType="vertical"></nz-divider>
-          <span class="operate">修改对手</span>
+          <span class="operate" (click)="opponent()">修改对手</span>
         </td>
       </tr>
     </tbody>
