@@ -62,13 +62,13 @@
         <td>{{data.allNum}}</td>
         <td>{{data.nowNum}}</td>
         <td>{{data.round}}</td>
-        <td>可开启下一轮</td>
+        <td>{{data.status === 1 ? '可开启下一轮' : '当前轮次未结束'}}</td>
         <td>
-          <span class="operate" (click)="nextModal(data.id)">开启下一轮</span>
+          <span [ngClass]="{'operate': data.status === 1, 'disabled': data.status === 0}" (click)="data.status ? nextModal(data.id) : ''">开启下一轮</span>
           <nz-divider nzType="vertical"></nz-divider>
           <span class="operate">产生比赛名次</span>
           <nz-divider nzType="vertical"></nz-divider>
-          <span class="operate" routerLink="/main/match/arrange/1">查看对阵表</span>
+          <span class="operate" [routerLink]="['/main/match/arrange', data.matchId]">查看对阵表</span>
         </td>
       </tr>
     </tbody>

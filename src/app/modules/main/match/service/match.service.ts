@@ -30,4 +30,12 @@ export class MatchService {
     return  this.http.get<Response>(`api/match/detail?id=${id}`);
   }
 
+  getArrange() {
+    return this.http.get("api/arrange/list");
+  }
+
+  getConfrontation(matchId: number) {
+    return this.http.get(`api/arrange/confrontation?matchId=${matchId}`);
+  }
+
 }

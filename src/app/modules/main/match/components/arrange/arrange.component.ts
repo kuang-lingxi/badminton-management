@@ -64,11 +64,8 @@ export class ArrangeComponent implements OnInit {
       status: [this.matchStatus.enrolling],
     });
 
-    this.matchService.getMatchList(0, this.pageSize, this.pageIndex, "").subscribe(response => {
-      if(response.code === 0) {
-        // this.total = response.message.total;
-        // this.matchData = response.message.matchList;
-      }
+    this.matchService.getArrange().subscribe(resp => {
+      this.matchData = resp;
     })
   }
 

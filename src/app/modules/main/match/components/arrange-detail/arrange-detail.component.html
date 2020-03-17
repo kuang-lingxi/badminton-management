@@ -6,7 +6,7 @@
     <a [routerLink]="['/main/match/arrange']">arrange</a>
   </nz-breadcrumb-item>
   <nz-breadcrumb-item>
-    1
+    {{id}}
   </nz-breadcrumb-item>
 </nz-breadcrumb>
 
@@ -29,12 +29,12 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of arrangeTable.data; let i = index">
-        <td [routerLink] = "['/main/match/list', data.id]" class="link">{{i+1}}</td>
+        <td>{{data.id}}</td>
         <td>{{data.team1}}</td>
         <td>{{data.team2}}</td>
         <td>{{data.address}}</td>
-        <td>{{data.result === '' ? '暂无结果' : data.result}}</td>
-        <td>{{data.referee}}</td>
+        <td>{{data.grade ? data.grade : '暂无结果'}}</td>
+        <td>{{data.refereeName}}</td>
         <td>
           <span class="operate" (click)="address()">修改比赛场地</span>
           <nz-divider nzType="vertical"></nz-divider>

@@ -3,6 +3,8 @@ import { NzModalService } from 'ng-zorro-antd';
 import { AddressModalComponent } from '../address-modal/address-modal.component';
 import { ResultModalComponent } from '../result-modal/result-modal.component';
 import { OpponentModalComponent } from '../opponent-modal/opponent-modal.component';
+import { ActivatedRoute } from '@angular/router';
+import { MatchService } from '../../service/match.service';
 
 @Component({
   selector: 'app-arrange-detail',
@@ -11,29 +13,21 @@ import { OpponentModalComponent } from '../opponent-modal/opponent-modal.compone
 })
 export class ArrangeDetailComponent implements OnInit {
 
-  arrange = [
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-    {id: 0, team1: '牛逼的队伍1', team2: '牛逼的队伍2', address: '5号场', result: '', referee: 'klx'},
-  ]
+  id: number;
+
+  arrange;
 
   constructor(
     private modalService: NzModalService,
+    private activeRoute: ActivatedRoute,
+    private matchService: MatchService
   ) { }
 
   ngOnInit() {
+    this.id = parseInt(this.activeRoute.snapshot.paramMap.get("id"));
+    this.matchService.getConfrontation(this.id).subscribe(resp => {
+      this.arrange = resp;
+    })
   }
 
   address() {
