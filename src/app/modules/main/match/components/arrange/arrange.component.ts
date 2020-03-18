@@ -35,19 +35,6 @@ export class ArrangeComponent implements OnInit {
   }
 
   matchData: any = [
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'},
-    {id: 0, introduce: 'introduce', allNum: 90,  nowNum: 40, round: 0, name: '3v3趣味赛'}
   ]
 
   constructor(
@@ -99,20 +86,26 @@ export class ArrangeComponent implements OnInit {
   update() {
     this.matchService.getMatchList(parseInt(this.validateForm.value.status), this.pageSize, this.pageIndex, this.validateForm.value.matchName).subscribe(response => {
       if(response.code === 0) {
-        // this.total = response.message.total;
-        // this.matchData = response.message.matchList;
+        this.total = response.message.total;
+        this.matchData = response.message.matchList;
       }
     })
   }
 
-  nextModal(id: number) {
+  nextModal(id: number, nowNum: number) {
     console.log(id);
     const modal = this.modalService.create({
       nzTitle: "开启下一轮",
       nzContent: NextModalComponent,
       nzWidth: 700,
       nzFooter: null,
-      nzComponentParams: {matchId: id}
+      nzComponentParams: {matchId: id, nowNum: nowNum}
+    })
+
+    modal.afterClose.subscribe(resp => {
+      if(resp) {
+        this.update();
+      }
     })
   }
 }

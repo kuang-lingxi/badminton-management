@@ -64,7 +64,7 @@
         <td>{{data.round}}</td>
         <td>{{data.status === 1 ? '可开启下一轮' : '当前轮次未结束'}}</td>
         <td>
-          <span [ngClass]="{'operate': data.status === 1, 'disabled': data.status === 0}" (click)="data.status ? nextModal(data.id) : ''">开启下一轮</span>
+          <span [ngClass]="{'operate': data.status === 1, 'disabled': data.status === 0}" (click)="data.status ? nextModal(data.matchId, data.nowNum) : ''">开启下一轮</span>
           <nz-divider nzType="vertical"></nz-divider>
           <span class="operate">产生比赛名次</span>
           <nz-divider nzType="vertical"></nz-divider>

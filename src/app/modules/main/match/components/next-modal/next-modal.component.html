@@ -19,6 +19,15 @@
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24">
+      该轮名字
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="roundName"  >
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
       比赛方式
     </nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
@@ -27,7 +36,7 @@
         <nz-option [nzValue]="1" nzLabel="循环制"></nz-option>
       </nz-select>
     </nz-form-control>
-  </nz-form-item>
+  </nz-form-item> -->
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24">
@@ -35,18 +44,49 @@
     </nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-select formControlName="way">
-        <nz-option [nzValue]="0" nzLabel="按积分编排"></nz-option>
-        <nz-option [nzValue]="1" nzLabel="随机编排"></nz-option>
+        <nz-option [nzValue]="1" nzLabel="按积分编排"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="随机编排"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item *ngIf="showTeam">
+  <!-- <nz-form-item *ngIf="showTeam">
     <nz-form-label [nzSm]="6" [nzXs]="24">
       每组队伍数
     </nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-input-number formControlName="teamNum" [nzMin]="1" [nzStep]="1"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item> -->
+
+  <nz-form-item *ngFor="let control of listOfControl; let i = index">
+    <nz-form-label [nzSm]="6" [nzXs]="24" *ngIf="i == 0" [nzFor]="control.controlInstance"
+      >比赛场地
+    </nz-form-label>
+    <nz-form-control
+      [nzSm]="14" 
+      [nzXs]="24"
+      [nzOffset]="i == 0 ? 0 : 6"
+      nzErrorTip="Please input passenger's name or delete this field."
+    >
+      <input
+        class="passenger-input"
+        nz-input
+        placeholder="请输入场地名"
+        [attr.id]="control.id"
+        [formControlName]="control.controlInstance"
+      />
+      <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></i>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
+      <button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
+        <i nz-icon nzType="plus"></i>
+        添加场地
+      </button>
     </nz-form-control>
   </nz-form-item>
 
