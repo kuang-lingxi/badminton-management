@@ -8,9 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 
 interface ItemData {
   id: number;
-  name: string;
-  age: number;
-  address: string;
+  teamName: string;
+  realName: string;
 }
 
 @Component({
@@ -61,19 +60,17 @@ export class GeneratePrizeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    for (let i = 0; i < 100; i++) {
-      this.listOfAllData.push({
-        id: i,
-        name: `Edward King ${i}`,
-        age: 32,
-        address: `London, Park Lane no. ${i}`
-      });
-    }
 
     this.matchId = parseInt(this.activeRouter.snapshot.paramMap.get("id"));
 
     this.validateForm = this.fb.group({
       status: [1]
+    })
+
+    this.matchService.getRoundUser(this.matchId, 1).subscribe(resp => {
+      if(resp.code === 0) {
+        this.listOfAllData = resp.message.user;
+      }
     })
 
     this.matchService.getRound(this.matchId).subscribe(resp => {
@@ -95,11 +92,20 @@ export class GeneratePrizeComponent implements OnInit {
   }
 
   checkAll(value: boolean): void {
-    this.listOfDisplayData.forEach(item => (this.mapOfCheckedId[item.id] = value));
+    this.listOfAllData.forEach(item => (this.mapOfCheckedId[item.id] = value));
     this.refreshStatus();
   }
 
   change(type) {
-    console.log(type);
+    this.matchService.getRoundUser(this.matchId, type).subscribe(resp => {
+      if(resp.code === 0) {
+        this.listOfAllData = resp.message.user;
+      }
+    })
+  }
+
+  prize() {
+    this.mapOfCheckedId = {};
+    console.log(this.mapOfCheckedId)
   }
 }

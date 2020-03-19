@@ -57,4 +57,8 @@ export class MatchService {
     return this.http.post<Response>(`api/match/end`, params);
   }
 
+  getRoundUser(matchId: number, roundType: number): Observable<Response> {
+    return this.http.get<Response>(`api/match/users?matchId=${matchId}&roundType=${roundType}`);
+  }
+
 }
