@@ -66,7 +66,7 @@
         <td>
           <span [ngClass]="{'operate': data.status === 1, 'disabled': data.status === 0}" (click)="data.status ? nextModal(data.matchId, data.nowNum) : ''">开启下一轮</span>
           <nz-divider nzType="vertical"></nz-divider>
-          <span class="operate">产生比赛名次</span>
+          <span [ngClass]="{'operate': data.status === 1, 'disabled': data.status === 0}" (click)="data.status ? end(data.matchId) : ''">结束比赛</span>
           <nz-divider nzType="vertical"></nz-divider>
           <span class="operate" [routerLink]="['/main/match/arrange', data.matchId]">查看对阵表</span>
         </td>

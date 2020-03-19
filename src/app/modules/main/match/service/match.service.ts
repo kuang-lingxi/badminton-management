@@ -42,4 +42,19 @@ export class MatchService {
     return this.http.get<Response>(`api/arrange/auto?matchId=${matchId}&address=${address}&sort=${sort}&roundName=${roundName}`);
   }
 
+  getRound(matchId: number): Observable<Response> {
+    return this.http.get<Response>(`api/match/round?matchId=${matchId}`);
+  }
+
+  prizeList(): Observable<Response> {
+    return this.http.get<Response>(`api/match/prizeList`);
+  }
+
+  end(matchId: number): Observable<Response> {
+    const params = {
+      matchId
+    }
+    return this.http.post<Response>(`api/match/end`, params);
+  }
+
 }

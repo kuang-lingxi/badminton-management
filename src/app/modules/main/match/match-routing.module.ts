@@ -4,6 +4,8 @@ import { MatchListComponent } from './components/match-list/match-list.component
 import { MatchDetailComponent } from './components/match-detail/match-detail.component';
 import { ArrangeComponent } from './components/arrange/arrange.component';
 import { ArrangeDetailComponent } from './components/arrange-detail/arrange-detail.component';
+import { GeneratePrizeComponent } from './components/generate-prize/generate-prize.component';
+import { NeedPrizeComponent } from './components/need-prize/need-prize.component';
 
 
 const routes: Routes = [
@@ -28,6 +30,14 @@ const routes: Routes = [
   {
     path: 'arrange/:id',
     component: ArrangeDetailComponent
+  },
+  {
+    path: 'generate/:id',
+    component: GeneratePrizeComponent
+  },
+  {
+    path: 'prizeList',
+    component: NeedPrizeComponent
   }
 ];
 

@@ -83,7 +83,8 @@ export class MatchModalComponent implements OnInit {
       status: 0,
       enterId: null,
       id: this.matchInfo && this.matchInfo.id,
-      signNum: 0
+      signNum: 0,
+      isPrize: 0
     }
 
     if(this.isUpdate) {

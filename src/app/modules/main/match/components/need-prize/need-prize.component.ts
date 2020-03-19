@@ -4,16 +4,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { MatchModalComponent } from '../match-modal/match-modal.component';
 import { MatchService } from '../../service/match.service';
-import { NextModalComponent } from '../next-modal/next-modal.component';
-import { PrizeModalComponent } from '../prize-modal/prize-modal.component';
+import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-arrange',
-  templateUrl: './arrange.component.html',
-  styleUrls: ['./arrange.component.scss']
+  selector: 'app-need-prize',
+  templateUrl: './need-prize.component.html',
+  styleUrls: ['./need-prize.component.scss']
 })
-export class ArrangeComponent implements OnInit {
+export class NeedPrizeComponent implements OnInit {
   validateForm: FormGroup;
 
   pageSize: number = 10;
@@ -37,6 +36,7 @@ export class ArrangeComponent implements OnInit {
   }
 
   matchData: any = [
+    
   ]
 
   constructor(
@@ -54,36 +54,15 @@ export class ArrangeComponent implements OnInit {
       status: [this.matchStatus.enrolling],
     });
 
-    this.matchService.getArrange().subscribe(resp => {
-      this.matchData = resp;
-    })
-  }
-
-  submitForm(): void {
-    this.pageIndex = 1;
-    this.pageSize = 10;
-    this.matchService.getMatchList(parseInt(this.validateForm.value.status), this.pageSize, this.pageIndex, this.validateForm.value.matchName).subscribe(response => {
+    this.matchService.prizeList().subscribe(response => {
       if(response.code === 0) {
-        this.total = response.message.total;
-        this.matchData = response.message.matchList;
+        this.matchData = response.message.prizeList;
       }
     })
   }
 
-  clear(e) {
-    e.preventDefault();
-    this.validateForm.patchValue({matchName: ""});
-    this.validateForm.patchValue({status:0});
-    this.update();
-  }
-
-
-  pageIndexChange() {
-    this.update();
-  }
-
-  pageSizeChange() {
-    this.update();
+  open(id) {
+    this.router.navigateByUrl(`/main/match/generate/${id}`);
   }
 
   update() {
@@ -95,30 +74,4 @@ export class ArrangeComponent implements OnInit {
     })
   }
 
-  nextModal(id: number, nowNum: number) {
-    console.log(id);
-    const modal = this.modalService.create({
-      nzTitle: "开启下一轮",
-      nzContent: NextModalComponent,
-      nzWidth: 700,
-      nzFooter: null,
-      nzComponentParams: {matchId: id, nowNum: nowNum}
-    })
-
-    modal.afterClose.subscribe(resp => {
-      if(resp) {
-        this.update();
-      }
-    })
-  }
-
-  prize(id: number) {
-    this.router.navigateByUrl(`/main/match/generate/${id}`);
-  }
-
-  end(matchId) {
-    this.matchService.end(matchId).subscribe(resp => {
-      console.log(resp);
-    })
-  }
 }

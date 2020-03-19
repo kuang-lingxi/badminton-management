@@ -13,10 +13,13 @@ import { ArrangeDetailComponent } from './components/arrange-detail/arrange-deta
 import { AddressModalComponent } from './components/address-modal/address-modal.component';
 import { ResultModalComponent } from './components/result-modal/result-modal.component';
 import { OpponentModalComponent } from './components/opponent-modal/opponent-modal.component';
+import { PrizeModalComponent } from './components/prize-modal/prize-modal.component';
+import { GeneratePrizeComponent } from './components/generate-prize/generate-prize.component';
+import { NeedPrizeComponent } from './components/need-prize/need-prize.component';
 
 
 @NgModule({
-  declarations: [MatchListComponent, MatchDetailComponent, MatchModalComponent, ArrangeComponent, NextModalComponent, ArrangeDetailComponent, AddressModalComponent, ResultModalComponent, OpponentModalComponent],
+  declarations: [MatchListComponent, MatchDetailComponent, MatchModalComponent, ArrangeComponent, NextModalComponent, ArrangeDetailComponent, AddressModalComponent, ResultModalComponent, OpponentModalComponent, PrizeModalComponent, GeneratePrizeComponent, NeedPrizeComponent],
   imports: [
     CommonModule,
     MatchRoutingModule,
@@ -25,6 +28,6 @@ import { OpponentModalComponent } from './components/opponent-modal/opponent-mod
   providers: [
     MatchService
   ],
-  entryComponents: [MatchModalComponent, NextModalComponent, AddressModalComponent, ResultModalComponent, OpponentModalComponent]
+  entryComponents: [MatchModalComponent, NextModalComponent, AddressModalComponent, ResultModalComponent, OpponentModalComponent, PrizeModalComponent]
 })
 export class MatchModule { }
