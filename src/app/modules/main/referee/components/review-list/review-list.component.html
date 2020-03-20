@@ -1,3 +1,12 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/main/overview']">main</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    notice
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+
 <div class="content">
   <form class="mb-20" nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item>
@@ -38,6 +47,7 @@
         <td>{{data.text}}</td>
         <td>
           <span class="operate" (click)="showDetail(data.img)">查看材料</span>
+          <span class="operate" (click)="showDetail(data.img)">通过</span>
         </td>
       </tr>
     </tbody>

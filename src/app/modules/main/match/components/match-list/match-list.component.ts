@@ -51,7 +51,7 @@ export class MatchListComponent implements OnInit {
       status: [this.matchStatus.enrolling],
     });
 
-    this.matchService.getMatchList(0, this.pageSize, this.pageIndex, "").subscribe(response => {
+    this.matchService.getMatchList(-1, this.pageSize, this.pageIndex, "").subscribe(response => {
       if(response.code === 0) {
         this.total = response.message.total;
         this.matchData = response.message.matchList;
@@ -94,6 +94,10 @@ export class MatchListComponent implements OnInit {
       nzContent: MatchModalComponent,
       nzWidth: 700,
       nzFooter: null
+    })
+
+    modal.afterClose.subscribe(resp => {
+      this.update();
     })
   }
 

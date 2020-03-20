@@ -3,5 +3,5 @@ export enum matchStatusEnum {
   enrollEnd = 1,
   matching = 2,
   numMax = 3,
-  end = 4
+  end = -1
 }

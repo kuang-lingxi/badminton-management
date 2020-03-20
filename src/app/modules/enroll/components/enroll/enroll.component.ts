@@ -113,7 +113,8 @@ export class EnrollComponent implements OnInit {
   goBack() {
     const state: any = this.location.getState();
     if(state.navigationId === 1) {
-      window.location.href = "http://localhost:4200"
+      this.location.back();
+      // window.location.href = "http://localhost:4200"
     }else {
       this.location.back();
     }
