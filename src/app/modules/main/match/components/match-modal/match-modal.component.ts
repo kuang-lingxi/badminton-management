@@ -48,6 +48,7 @@ export class MatchModalComponent implements OnInit {
 
     if(this.matchInfo) {
       this.isUpdate = true;
+      this.validateForm.get("prize").disable();
       if(this.matchInfo.limit !== 0) {
         this.showLimit = true;
       }
@@ -59,6 +60,7 @@ export class MatchModalComponent implements OnInit {
     }else {
       this.validateForm.patchValue({'limit': 0});
       this.validateForm.patchValue({'isTeamUp': 0});
+      this.addField();
     }
 
     this.matchService.getType().subscribe(response => {
@@ -67,7 +69,6 @@ export class MatchModalComponent implements OnInit {
       }
     })
 
-    this.addField();
   }
 
   submitForm(): void {

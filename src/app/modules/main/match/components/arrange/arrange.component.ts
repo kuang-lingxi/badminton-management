@@ -87,11 +87,8 @@ export class ArrangeComponent implements OnInit {
   }
 
   update() {
-    this.matchService.getMatchList(parseInt(this.validateForm.value.status), this.pageSize, this.pageIndex, this.validateForm.value.matchName).subscribe(response => {
-      if(response.code === 0) {
-        this.total = response.message.total;
-        this.matchData = response.message.matchList;
-      }
+    this.matchService.getArrange().subscribe(resp => {
+      this.matchData = resp;
     })
   }
 

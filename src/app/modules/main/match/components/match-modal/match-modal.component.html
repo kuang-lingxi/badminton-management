@@ -100,7 +100,7 @@
     </nz-form-item>
   </ng-container>
 
-  <nz-form-item>
+  <nz-form-item *ngIf="!isUpdate">
     <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
       <button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
         <i nz-icon nzType="plus"></i>
@@ -109,14 +109,14 @@
     </nz-form-control>
   </nz-form-item>
 
-  <!-- <nz-form-item>
+  <nz-form-item *ngIf="isUpdate">
     <nz-form-label [nzSm]="6" [nzXs]="24">
       奖品设置
     </nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <textarea formControlName="prize" nz-input rows="2" placeholder="write any thing"></textarea>
     </nz-form-control>
-  </nz-form-item> -->
+  </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24">
