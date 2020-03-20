@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { MatchService } from '../../service/match.service';
 
@@ -21,6 +21,8 @@ export class MatchModalComponent implements OnInit {
   showTeamUpLimit: boolean = false;
 
   isUpdate = false;
+
+  listOfControl: Array<{ id: number; controlInstance: string }> = [];
 
   constructor(
     private fb: FormBuilder,
@@ -64,12 +66,23 @@ export class MatchModalComponent implements OnInit {
         this.type = response.message.result;
       }
     })
+
+    this.addField();
   }
 
   submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
+    // for (const i in this.validateForm.controls) {
+    //   this.validateForm.controls[i].markAsDirty();
+    //   this.validateForm.controls[i].updateValueAndValidity();
+    // }
+    console.log(this.listOfControl);
+    let prizeList = [];
+    for(let i = 0, len = this.listOfControl.length; i < len; i++) {
+      const item = this.listOfControl[i].controlInstance;
+      let prize = this.validateForm.value[item + "prize"];
+      let grade = this.validateForm.value[item + "grade"];
+      let thing = this.validateForm.value[item + "thing"];
+      prizeList.push(`${prize}：实物奖励（${thing}），积分奖励（${grade}分）`);
     }
     let reqMsg = {
       ...this.validateForm.value,
@@ -84,7 +97,8 @@ export class MatchModalComponent implements OnInit {
       enterId: null,
       id: this.matchInfo && this.matchInfo.id,
       signNum: 0,
-      isPrize: 0
+      isPrize: 0,
+      prize: prizeList.join("\n")
     }
 
     if(this.isUpdate) {
@@ -93,12 +107,24 @@ export class MatchModalComponent implements OnInit {
           this.modalRef.close(true);
         }
       })
+      
     }else {
       this.matchService.insertMatch(reqMsg).subscribe(response => {
-        if(response.message.result) {
+        if(response.code === 0) {
+          for(let i = 0, len = this.listOfControl.length; i < len; i++) {
+            const item = this.listOfControl[i].controlInstance;
+            let prize = this.validateForm.value[item + "prize"];
+            let grade = this.validateForm.value[item + "grade"];
+            let thing = this.validateForm.value[item + "thing"];
+            this.matchService.insertPrize(parseInt(response.message.result), prize, thing, grade).subscribe(resp => {
+              console.log(resp);
+            })
+          }
           this.modalRef.close(true);
         }
+        
       })
+      
     }
   }
 
@@ -125,6 +151,44 @@ export class MatchModalComponent implements OnInit {
       this.showTeamUpLimit = true;
     }else {
       this.showTeamUpLimit = false;
+    }
+  }
+
+  addField(e?: MouseEvent): void {
+    if (e) {
+      e.preventDefault();
+    }
+    const id = this.listOfControl.length > 0 ? this.listOfControl[this.listOfControl.length - 1].id + 1 : 0;
+
+    const control = {
+      id,
+      controlInstance: `passenger${id}`
+    };
+    const index = this.listOfControl.push(control);
+    console.log(this.listOfControl[this.listOfControl.length - 1]);
+    this.validateForm.addControl(
+      ""+this.listOfControl[index - 1].controlInstance + "prize",
+      new FormControl(null, Validators.required)
+    );
+    this.validateForm.addControl(
+      ""+this.listOfControl[index - 1].controlInstance + "grade",
+      new FormControl(null, Validators.required)
+    );
+    this.validateForm.addControl(
+      ""+this.listOfControl[index - 1].controlInstance + "thing",
+      new FormControl(null, Validators.required)
+    );
+  }
+
+  removeField(i: { id: number; controlInstance: string }, e: MouseEvent): void {
+    e.preventDefault();
+    if (this.listOfControl.length > 1) {
+      const index = this.listOfControl.indexOf(i);
+      this.listOfControl.splice(index, 1);
+      console.log(this.listOfControl);
+      this.validateForm.removeControl(i.controlInstance + "grade");
+      this.validateForm.removeControl(i.controlInstance + "prize");
+      this.validateForm.removeControl(i.controlInstance + "thing");
     }
   }
 }

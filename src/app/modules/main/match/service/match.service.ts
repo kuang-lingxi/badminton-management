@@ -61,4 +61,17 @@ export class MatchService {
     return this.http.get<Response>(`api/match/users?matchId=${matchId}&roundType=${roundType}`);
   }
 
+  insertPrize(matchId: number, prize: string, thing: string, grade: number): Observable<Response> {
+    const params = {
+      matchId,
+      prize,
+      thing,
+      grade
+    }
+
+    console.log(params);
+
+    return this.http.post<Response>(`api/prize/insert`, params);
+  }
+
 }

@@ -39,14 +39,84 @@
     </nz-form-control>
   </nz-form-item>
 
+  <ng-container *ngFor="let control of listOfControl; let i = index">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" *ngIf="i == 0" [nzFor]="control.controlInstance + 'prize'"
+        >奖项名称
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" 
+        [nzXs]="24"
+        [nzOffset]="i == 0 ? 0 : 6"
+        nzErrorTip="Please input passenger's name or delete this field."
+      >
+        <input
+          class="passenger-input"
+          nz-input
+          placeholder="请输入奖项名称"
+          [formControlName]="control.controlInstance + 'prize'"
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" *ngIf="i == 0" [nzFor]="control.controlInstance + 'thing'"
+        >实物奖励
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" 
+        [nzXs]="24"
+        [nzOffset]="i == 0 ? 0 : 6"
+        nzErrorTip="Please input passenger's name or delete this field."
+      >
+        <input
+          class="passenger-input"
+          nz-input
+          placeholder="请输入可获得的实物奖励"
+          [formControlName]="control.controlInstance + 'thing'"
+        />
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" *ngIf="i == 0" [nzFor]="control.controlInstance + 'grade'"
+        >积分奖励
+      </nz-form-label>
+      <nz-form-control
+        [nzSm]="14" 
+        [nzXs]="24"
+        [nzOffset]="i == 0 ? 0 : 6"
+        nzErrorTip="Please input passenger's name or delete this field."
+      >
+        <nz-input-number 
+          [formControlName]="control.controlInstance + 'grade'"
+          [nzMin]="1" 
+          [nzStep]="1"
+          style="margin-right: 10px;"
+        >
+        </nz-input-number>
+        <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></i>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+
   <nz-form-item>
+    <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
+      <button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
+        <i nz-icon nzType="plus"></i>
+        添加奖项
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24">
       奖品设置
     </nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <textarea formControlName="prize" nz-input rows="2" placeholder="write any thing"></textarea>
     </nz-form-control>
-  </nz-form-item>
+  </nz-form-item> -->
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24">
