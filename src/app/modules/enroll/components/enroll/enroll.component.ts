@@ -49,6 +49,9 @@ export class EnrollComponent implements OnInit {
             this.validateForm.addControl(i+"", new FormControl("", Validators.required, [this.isExited, this.isForbid]))
             this.formList.push(i);
           }
+          if(this.schoolNumber) {
+            this.validateForm.patchValue({'0': this.schoolNumber})
+          }
         }
       }
     })

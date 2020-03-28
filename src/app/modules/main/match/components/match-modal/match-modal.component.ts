@@ -24,6 +24,14 @@ export class MatchModalComponent implements OnInit {
 
   listOfControl: Array<{ id: number; controlInstance: string }> = [];
 
+  matchType = [
+    {name: '男单', num: 1},
+    {name: '女单', num: 1},
+    {name: '男双', num: 2},
+    {name: '女双', num: 2},
+    {name: '混双', num: 2},
+  ]
+
   constructor(
     private fb: FormBuilder,
     private modalRef: NzModalRef,
@@ -43,7 +51,7 @@ export class MatchModalComponent implements OnInit {
       player: [this.matchInfo && this.matchInfo.player, [Validators.required]],
       time: [this.matchInfo && new Date(this.matchInfo.time), [Validators.required]],
       isTeamUp: [null, [Validators.required]],
-      teamUpLimit: [this.matchInfo && this.matchInfo.teamUpLimit]
+      teamUpLimit: [this.matchInfo && this.matchInfo.teamUpLimit],
     });                                                                                                                                           
 
     if(this.matchInfo) {
@@ -60,6 +68,7 @@ export class MatchModalComponent implements OnInit {
     }else {
       this.validateForm.patchValue({'limit': 0});
       this.validateForm.patchValue({'isTeamUp': 0});
+      this.validateForm.addControl("matchType", new FormControl(null, Validators.required))
       this.addField();
     }
 
@@ -76,7 +85,6 @@ export class MatchModalComponent implements OnInit {
     //   this.validateForm.controls[i].markAsDirty();
     //   this.validateForm.controls[i].updateValueAndValidity();
     // }
-    console.log(this.listOfControl);
     let prizeList = [];
     for(let i = 0, len = this.listOfControl.length; i < len; i++) {
       const item = this.listOfControl[i].controlInstance;

@@ -142,12 +142,23 @@
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24">
-      是否组队
+      赛事类别
     </nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
       <nz-select formControlName="isTeamUp" (ngModelChange)="teamUpChange($event)">
-        <nz-option [nzValue]="0" nzLabel="否"></nz-option>
-        <nz-option [nzValue]="1" nzLabel="是"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="个人赛"></nz-option>
+        <nz-option [nzValue]="1" nzLabel="团体赛"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="showTeamUpLimit && !matchInfo">
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      对阵类别
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select formControlName="matchType" nzMode="multiple">
+        <nz-option *ngFor="let type of matchType;let i = index" [nzValue]="i" [nzLabel]="type.name"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
