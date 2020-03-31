@@ -31,7 +31,11 @@ export class MatchService {
   }
 
   getArrange() {
-    return this.http.get("api/arrange/list");
+    return this.http.get("api/arrange/singleList");
+  }
+
+  getTeamArrange() {
+    return this.http.get("api/arrange/teamList");
   }
 
   getConfrontation(matchId: number) {

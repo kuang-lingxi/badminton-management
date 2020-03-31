@@ -6,6 +6,7 @@ import { ArrangeComponent } from './components/arrange/arrange.component';
 import { ArrangeDetailComponent } from './components/arrange-detail/arrange-detail.component';
 import { GeneratePrizeComponent } from './components/generate-prize/generate-prize.component';
 import { NeedPrizeComponent } from './components/need-prize/need-prize.component';
+import { TeamArrangeComponent } from './components/team-arrange/team-arrange.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'prizeList',
     component: NeedPrizeComponent
+  },
+  {
+    path: 'teamArrange',
+    component: TeamArrangeComponent
   }
 ];
 

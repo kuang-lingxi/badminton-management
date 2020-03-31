@@ -16,10 +16,11 @@ import { OpponentModalComponent } from './components/opponent-modal/opponent-mod
 import { PrizeModalComponent } from './components/prize-modal/prize-modal.component';
 import { GeneratePrizeComponent } from './components/generate-prize/generate-prize.component';
 import { NeedPrizeComponent } from './components/need-prize/need-prize.component';
+import { TeamArrangeComponent } from './components/team-arrange/team-arrange.component';
 
 
 @NgModule({
-  declarations: [MatchListComponent, MatchDetailComponent, MatchModalComponent, ArrangeComponent, NextModalComponent, ArrangeDetailComponent, AddressModalComponent, ResultModalComponent, OpponentModalComponent, PrizeModalComponent, GeneratePrizeComponent, NeedPrizeComponent],
+  declarations: [MatchListComponent, MatchDetailComponent, MatchModalComponent, ArrangeComponent, NextModalComponent, ArrangeDetailComponent, AddressModalComponent, ResultModalComponent, OpponentModalComponent, PrizeModalComponent, GeneratePrizeComponent, NeedPrizeComponent, TeamArrangeComponent],
   imports: [
     CommonModule,
     MatchRoutingModule,

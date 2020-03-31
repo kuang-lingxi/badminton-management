@@ -1,0 +1,38 @@
+.content {
+  background-color: #fff;
+  padding: 20px;
+  position: relative;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.operate {
+  margin: 0 5px;
+  cursor: pointer;
+  color: #81b5ef;
+}
+
+.link {
+  cursor: pointer;
+  color: #81b5ef;
+}
+
+.new {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+.disabled {
+  color: #f1f2f5;
+}

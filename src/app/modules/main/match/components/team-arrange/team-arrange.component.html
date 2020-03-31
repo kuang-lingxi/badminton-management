@@ -1,0 +1,76 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/main/overview']">main</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    arrange
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<div class="content">
+  <form class="mb-20" nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label>比赛名称</nz-form-label>
+      <nz-form-control>
+        <input formControlName="matchName" nz-input placeholder="请输入比赛名称" />
+      </nz-form-control>
+    </nz-form-item>
+    <!-- <nz-form-item>
+      <nz-form-label>状态</nz-form-label>
+      <nz-form-control nzErrorTip="Please input your Password!">
+        <nz-select name="select-validate" formControlName="status">
+          <nz-option [nzValue]="matchStatus.enrolling" nzLabel="报名中"></nz-option>
+          <nz-option [nzValue]="matchStatus.enrollEnd" nzLabel="报名截止"></nz-option>
+          <nz-option [nzValue]="matchStatus.matching" nzLabel="比赛中"></nz-option>
+          <nz-option [nzValue]="matchStatus.numMax" nzLabel="人数已满"></nz-option>
+          <nz-option [nzValue]="matchStatus.end" nzLabel="已结束"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary">搜索</button>
+        <button nz-button nzType="default" class="ml-10" (click)="clear($event)">清空</button>
+      </nz-form-control>
+    </nz-form-item> -->
+  </form>
+  <nz-table 
+    [nzData] = "matchData" 
+    [(nzPageSize)]="pageSize" 
+    [(nzPageIndex)]="pageIndex" 
+    [nzShowPagination]="true" 
+    [nzTotal]="total"
+    [nzShowSizeChanger]="true"
+    [nzShowQuickJumper]="true"
+    [nzFrontPagination]="false"
+    (nzPageIndexChange)="pageIndexChange()"
+    (nzPageSizeChange)="pageSizeChange()"
+  >
+    <thead>
+      <tr>
+        <th>赛事名称</th>
+        <th>总队伍数</th>
+        <th>剩余队伍</th>
+        <th>目前轮次</th>
+        <th>当前状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of matchData">
+        <td [routerLink] = "['/main/match/list', data.id]" class="link">{{data.name}}</td>
+        <td>{{data.allNum}}</td>
+        <td>{{data.nowNum}}</td>
+        <td>{{data.round}}</td>
+        <td>{{data.status === 1 ? '可开启下一轮' : '当前轮次未结束'}}</td>
+        <td>
+          <span [ngClass]="{'operate': data.status === 1, 'disabled': data.status === 0}" (click)="data.status ? nextModal(data.matchId, data.nowNum) : ''">开启下一轮</span>
+          <nz-divider nzType="vertical"></nz-divider>
+          <span [ngClass]="{'operate': data.status === 1, 'disabled': data.status === 0}" (click)="data.status ? end(data.matchId) : ''">结束比赛</span>
+          <nz-divider nzType="vertical"></nz-divider>
+          <span class="operate" [routerLink]="['/main/match/arrange', data.matchId]">查看对阵表</span>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
