@@ -42,6 +42,10 @@ export class MatchService {
     return this.http.get(`api/arrange/confrontation?matchId=${matchId}`);
   }
 
+  getTeamConfrontation(matchId: number): Observable<Response> {
+    return this.http.get<Response>(`api/arrange/teamConfrontation?matchId=${matchId}`);
+  }
+
   auto(matchId: number, address: String, sort: number, roundName: String): Observable<Response> {
     return this.http.get<Response>(`api/arrange/auto?matchId=${matchId}&address=${address}&sort=${sort}&roundName=${roundName}`);
   }

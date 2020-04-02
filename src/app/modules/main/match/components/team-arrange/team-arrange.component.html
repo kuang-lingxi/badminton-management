@@ -68,7 +68,7 @@
           <nz-divider nzType="vertical"></nz-divider>
           <span [ngClass]="{'operate': data.status === 1, 'disabled': data.status === 0}" (click)="data.status ? end(data.matchId) : ''">结束比赛</span>
           <nz-divider nzType="vertical"></nz-divider>
-          <span class="operate" [routerLink]="['/main/match/arrange', data.matchId]">查看对阵表</span>
+          <span class="operate" [routerLink]="['/main/match/arrangeTeam', data.matchId]">查看对阵表</span>
         </td>
       </tr>
     </tbody>

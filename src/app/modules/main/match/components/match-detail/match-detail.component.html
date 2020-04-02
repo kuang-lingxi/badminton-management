@@ -64,24 +64,22 @@
     </div>
   </div>
   <div class="rule">
-    <h3>赛事规则</h3>
+    <h3>赛事信息</h3>
     <hr>
     <div class="ruleDetail">
       <div class="show">
-        <h5>计分策略</h5>
-        <span></span>
+        <h5>赛事名称</h5>
+        <span>{{matchInfo.name}}</span>
+        <h5>赛事介绍</h5>
+        <span>{{matchInfo.introduce}}</span>
         <h5>赛事奖励</h5>
-        <span></span>
-        <h5>赛事积分</h5>
-        <span></span>
+        <span>{{matchInfo.prize}}</span>
       </div>
       <div class="show">
         <h5>开始时间</h5>
-        <span></span>
-        <h5>限制参赛人数</h5>
-        <span></span>
-        <h5>比赛场地</h5>
-        <span></span>
+        <span>{{matchInfo.begTime | date:"yyyy/MM/dd hh:mm:ss"}}</span>
+        <h5>结束时间</h5>
+        <span>{{matchInfo.endTime | date:"yyyy/MM/dd hh:mm:ss"}}</span>
       </div>
     </div>
   </div>
