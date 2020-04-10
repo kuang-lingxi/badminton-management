@@ -26,4 +26,11 @@ export class NoticeService {
   getNotice(pageSize: number, pageIndex: number): Observable<Response> {
     return this.http.get<Response>(`api/notice/list?delete=0&pageSize=${pageSize}&pageIndex=${pageIndex}`);
   }
+
+  updateHomeImg(imgUrl: string) {
+    const params = {
+      imgUrl
+    }
+    return this.http.post(`api/notice/updateImg`, params);
+  }
 }

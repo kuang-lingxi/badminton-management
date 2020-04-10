@@ -1,0 +1,37 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/main/overview']">main</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    notice
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<div class="content">
+  <form nz-form>
+    <nz-form-item>
+      <!-- <nz-form-label [nzSm]="5" [nzXs]="24">主页图片配置(小于2MB)</nz-form-label> -->
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-upload
+          class="avatar-uploader"
+          nzName="avatar"
+          nzListType="picture-card"
+          [(nzFileList)]="fileList" 
+          [nzBeforeUpload]="beforeUpload"
+          [nzShowUploadList]="false"
+        >
+          <ng-container *ngIf="!avatarUrl">
+            <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+            <div class="ant-upload-text">Upload</div>
+          </ng-container>
+          <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar" />
+        </nz-upload>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button class="login-form-button" [nzType]="'primary'" (click)="handleUpload()">提交</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
