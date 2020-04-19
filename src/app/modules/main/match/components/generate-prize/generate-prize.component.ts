@@ -5,6 +5,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { MatchModalComponent } from '../match-modal/match-modal.component';
 import { MatchService } from '../../service/match.service';
 import { ActivatedRoute } from '@angular/router';
+import { PrizeModalComponent } from '../prize-modal/prize-modal.component';
 
 interface ItemData {
   id: number;
@@ -50,11 +51,14 @@ export class GeneratePrizeComponent implements OnInit {
   listOfAllData: ItemData[] = [];
   mapOfCheckedId: { [key: string]: boolean } = {};
   round: any;
+  endType;
+  isEnd = false;
 
   constructor(
     private fb: FormBuilder,
     private matchService: MatchService,
-    private activeRouter: ActivatedRoute
+    private activeRouter: ActivatedRoute,
+    private nzModal: NzModalService
   ) {
 
   }
@@ -76,6 +80,7 @@ export class GeneratePrizeComponent implements OnInit {
     this.matchService.getRound(this.matchId).subscribe(resp => {
       if(resp.code === 0) {
         this.round = resp.message.round;
+        this.endType = this.round[this.round.length-1].type;
       }
     })
   }
@@ -97,6 +102,11 @@ export class GeneratePrizeComponent implements OnInit {
   }
 
   change(type) {
+    if(type === this.endType) {
+      this.isEnd = true;
+    }else {
+      this.isEnd = false;
+    }
     this.matchService.getRoundUser(this.matchId, type).subscribe(resp => {
       if(resp.code === 0) {
         this.listOfAllData = resp.message.user;
@@ -105,7 +115,13 @@ export class GeneratePrizeComponent implements OnInit {
   }
 
   prize() {
-    this.mapOfCheckedId = {};
-    console.log(this.mapOfCheckedId)
+    console.log(this.mapOfCheckedId);
+    const modal = this.nzModal.create({
+      nzTitle: "赛事奖励",
+      nzContent: PrizeModalComponent,
+      nzWidth: 700,
+      nzFooter: null,
+      nzComponentParams: {'userId': this.mapOfCheckedId, 'matchId': this.matchId, 'isEnd': this.isEnd}
+    })
   }
 }

@@ -1,1 +1,41 @@
-<p>prize-modal works!</p>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="clearfix">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      奖励类别
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select formControlName="prizeType" (ngModelChange)="change($event)">
+        <nz-option *ngFor="let item of prizeList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+        <!-- <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+        <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option> -->
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      奖励内容
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <textarea formControlName="prizeContent" nz-input [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">
+      人员名单
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <textarea formControlName="people" nz-input [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  
+
+  
+
+  <div class="footer">
+    <button nz-button nzType="primary" class="btn">确定</button>
+    <button nz-button class="btn" (click)="cancel($event)">取消</button>
+  </div>
+</form>

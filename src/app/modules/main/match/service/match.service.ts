@@ -82,4 +82,16 @@ export class MatchService {
     return this.http.post<Response>(`api/prize/insert`, params);
   }
 
+  getPrize(matchId: number) {
+    return this.http.get(`api/prize/list?matchId=${matchId}`);
+  }
+
+  getUserByUid(uid: number): Observable<Response> {
+    return this.http.get<Response>(`api/user/detail?uid=${uid}`);
+  }
+
+  endPrize(matchId) {
+    return this.http.post("api/match/endPrize", {matchId});
+  }
+ 
 }

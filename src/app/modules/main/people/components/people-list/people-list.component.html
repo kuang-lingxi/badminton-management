@@ -52,6 +52,8 @@
       *ngFor="let people of peopleList"
       [name] = "people.name"
       [introduce] = "people.introduce"
+      [schoolNumber] = "people.schoolNumber"
+      [referee] = "people.referee ? true : false"
     >
     </app-people-item>
 
