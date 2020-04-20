@@ -1,4 +1,16 @@
-<div class="content">
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/main/overview']">main</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/main/people/list']">user</a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    detail
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<div class="content" *ngIf="userInfo">
   <h3>用户信息</h3>
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item>
@@ -46,8 +58,8 @@
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone">管理员</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
         <nz-select formControlName="referee" [nzDisabled]="forbidEdit">
-          <nz-option [nzValue]="0" nzLabel="非管理员"></nz-option>
-          <nz-option [nzValue]="1" nzLabel="管理员"></nz-option>
+          <nz-option [nzValue]="0" nzLabel="管理员"></nz-option>
+          <nz-option [nzValue]="1" nzLabel="非管理员"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>

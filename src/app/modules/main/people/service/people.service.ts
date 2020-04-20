@@ -19,4 +19,8 @@ export class PeopleService {
   getPageUser(member: number, keywords: string, pageIndex: number, pageSize: number): Observable<Response> {
     return this.http.get<Response>(`api/user/page?member=${member}&keywords=${keywords}&pageIndex=${pageIndex}&pageSize=${pageSize}`);
   }
+
+  getUser(uid: number): Observable<Response> {
+    return this.http.get<Response>(`api/user/detail?uid=${uid}`);
+  }
 }

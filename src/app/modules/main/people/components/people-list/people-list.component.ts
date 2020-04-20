@@ -72,4 +72,22 @@ export class PeopleListComponent implements OnInit {
     })
   }
 
+  level(grade) {
+    if(grade < 100) {
+      return "D";
+    }else if(grade < 200) {
+      return "C";
+    }else if(grade < 300) {
+      return "C+";
+    }else if(grade < 400) {
+      return "B";
+    }else if(grade < 500) {
+      return "B+";
+    }else if(grade < 600) {
+      return "A";
+    }else {
+      return "A+";
+    }
+  }
+
 }

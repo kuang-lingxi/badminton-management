@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { PeopleService } from '../../service/people.service';
 
 @Component({
   selector: 'app-people-detail',
@@ -17,32 +19,36 @@ export class PeopleDetailComponent implements OnInit {
 
   forbidEdit: boolean = true;
 
+  uid: number;
+
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private activeRoute: ActivatedRoute,
+    private peopleServer: PeopleService
   ) { }
 
   ngOnInit() {
-    this.userInfo = {
-      name: 'klx',
-      introduce: 'introduce',
-      phone: '17801170810',
-      member: 1,
-      referee: 1,
-      grade: 100,
-      admin: 1
-    }
-    this.oldUserInfo = {
-      ...this.userInfo
-    }
-    this.validateForm = this.fb.group({
-      name: [this.userInfo.name, [Validators.required]],
-      phone: [this.userInfo.phone],
-      introduce: [this.userInfo.introduce],
-      member:[this.userInfo.member],
-      referee: [this.userInfo.referee],
-      grade: [this.userInfo.grade],
-      admin: [this.userInfo.admin]
-    });
+
+    this.uid = parseInt(this.activeRoute.snapshot.paramMap.get("id"));
+    this.peopleServer.getUser(this.uid).subscribe(resp => {
+      if(resp.code === 0) {
+        this.userInfo = resp.message.detail;
+        console.log(this.userInfo)
+        this.oldUserInfo = {
+          ...this.userInfo
+        }
+
+        this.validateForm = this.fb.group({
+          name: [this.userInfo.name, [Validators.required]],
+          phone: [this.userInfo.phone],
+          introduce: [this.userInfo.introduce],
+          member:[this.userInfo.member],
+          referee: [this.userInfo.referee],
+          grade: [this.userInfo.grade],
+          admin: [this.userInfo.admin]
+        });
+      }
+    })
   }
 
   edit() {

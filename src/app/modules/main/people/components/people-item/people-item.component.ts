@@ -25,6 +25,9 @@ export class PeopleItemComponent implements OnInit {
   @Input()
   referee: boolean;
 
+  @Input()
+  uid: number;
+
   constructor() { }
 
   ngOnInit() {
