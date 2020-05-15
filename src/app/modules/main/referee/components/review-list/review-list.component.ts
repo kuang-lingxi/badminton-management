@@ -17,7 +17,7 @@ export class ReviewListComponent implements OnInit {
 
   pageIndex: number = 1;
 
-  total: number = 30;
+  total: number = 10;
 
   reviewList: any = [
   ]

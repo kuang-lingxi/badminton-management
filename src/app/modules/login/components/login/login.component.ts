@@ -46,6 +46,8 @@ export class LoginComponent implements OnInit {
         }else {
           this.nzMessageService.create('error', '用户名或密码错误');
         }
+      }else {
+        this.nzMessageService.create('error', '您已被禁止登录，请联系管理员解除限制');
       }
     })
   }

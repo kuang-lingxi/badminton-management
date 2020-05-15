@@ -40,7 +40,6 @@
   >
     <thead>
       <tr>
-        <th>标题</th>
         <th>内容</th>
         <th>提交时间</th>
         <th>提交者</th>
@@ -49,14 +48,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of feedbackTable.data">
-        <td>{{data.title}}</td>
         <td>{{data.content}}</td>
         <td>{{data.time | date:"yyyy/MM/dd hh:mm:ss"}}</td>
         <td>{{data.user}}</td>
         <td>
-          <span class="operate" (click)="show()">查看</span>
+          <span class="operate" (click)="show(data.content)">查看</span>
           <nz-divider nzType="vertical"></nz-divider>
-          <span class="operate">已解决</span>
+          <span class="operate" (click)="confirm(data.id)">已解决</span>
         </td>
       </tr>
     </tbody>

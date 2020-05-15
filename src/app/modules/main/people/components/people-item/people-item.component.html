@@ -29,9 +29,9 @@
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <ul nz-menu nzSelectable>
-    <li nz-menu-item>禁止登陆</li>
-    <li nz-menu-item>禁止参赛</li>
-    <li nz-menu-item>授权为管理员</li>
+    <li nz-menu-item (click)="forbid()">禁止登陆</li>
+    <li nz-menu-item (click)="forbidMatch()">禁止参赛</li>
+    <li nz-menu-item (click)="admin()">授权为管理员</li>
     <li nz-menu-item>修改密码</li>
   </ul>
 </nz-dropdown-menu>

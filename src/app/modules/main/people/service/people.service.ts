@@ -23,4 +23,11 @@ export class PeopleService {
   getUser(uid: number): Observable<Response> {
     return this.http.get<Response>(`api/user/detail?uid=${uid}`);
   }
+
+  forbid(id: number) {
+    const params = {
+      id
+    }
+    return this.http.post(`api/user/forbid`, params);
+  }
 }
