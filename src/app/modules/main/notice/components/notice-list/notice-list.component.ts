@@ -50,15 +50,21 @@ export class NoticeListComponent implements OnInit {
       nzWidth: 700,
       nzFooter: null
     })
+
+    modal.afterClose.subscribe(resp => {
+      if(resp) {
+        this.update();
+      }
+    })
   }
 
-  edit() {
+  edit(title, content, top) {
     const modal = this.modalService.create({
       nzTitle: "编辑通知",
       nzContent: NoticeModalComponent,
       nzWidth: 700,
       nzFooter: null,
-      nzComponentParams: {noticeInfo: this.noticeInfo}
+      nzComponentParams: {noticeInfo: {title, content, top}}
     })
   }
 

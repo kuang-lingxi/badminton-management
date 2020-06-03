@@ -51,11 +51,15 @@ export class ImageComponent implements OnInit {
   };
 
   handleUpload(): void {
+    console.log(this.avatarUrl);
     const time = new Date().getTime() + "";
     this.noticeService.updateHomeImg(this.avatarUrl).subscribe(resp => {
+      console.log(resp);
       if(resp) {
         this.nzMessageService.create("success", "配置成功！");
         this.avatarUrl = null;
+      }else {
+        this.nzMessageService.create("fail", "配置失败!");
       }
     })
     // this.enrollService.referee(this.uid, time, this.value, this.avatarUrl).subscribe(resp => {

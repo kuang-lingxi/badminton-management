@@ -66,6 +66,11 @@ export class RefereeComponent implements OnInit {
   }
 
   submitForm() {
+    if(this.validateForm.value.schoolNumber === '2000000009') {
+      this.nzMessageService.create("error", "您没有裁判权限，请先申请成为裁判");
+
+      return ;
+    }
     this.enrollService.refereeMatch(this.id, this.validateForm.value.schoolNumber).subscribe(resp => {
       if(resp.code === 0) {
         if(resp.message.result) {

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal'
 import { NoticeService } from '../../service/notice.service';
 import { CookieService } from 'ngx-cookie-service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-notice-modal',
@@ -20,7 +21,8 @@ export class NoticeModalComponent implements OnInit {
     private fb: FormBuilder,
     private modalRef: NzModalRef,
     private noticeService: NoticeService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private message: NzMessageService
   ) { }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class NoticeModalComponent implements OnInit {
     const promulgator = this.cookieService.get("username");
     this.noticeService.insertNotice(title, content, promulgator, top, time).subscribe(resp => {
       if(resp) {
+        this.message.create("success", "发布成功！");
         this.modalRef.close(true);
       }
     });

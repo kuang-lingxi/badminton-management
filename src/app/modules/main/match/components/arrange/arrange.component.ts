@@ -7,6 +7,7 @@ import { MatchService } from '../../service/match.service';
 import { NextModalComponent } from '../next-modal/next-modal.component';
 import { PrizeModalComponent } from '../prize-modal/prize-modal.component';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-arrange',
@@ -43,7 +44,8 @@ export class ArrangeComponent implements OnInit {
     private fb: FormBuilder,
     private modalService: NzModalService,
     private matchService: MatchService,
-    private router: Router
+    private router: Router,
+    private nzMessage: NzMessageService
   ) {
     
   }
@@ -115,7 +117,8 @@ export class ArrangeComponent implements OnInit {
 
   end(matchId) {
     this.matchService.end(matchId).subscribe(resp => {
-      console.log(resp);
+      this.nzMessage.create("success", "比赛已结束!");
+      this.update();
     })
   }
 }

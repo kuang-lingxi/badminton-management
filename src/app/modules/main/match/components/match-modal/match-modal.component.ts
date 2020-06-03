@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { MatchService } from '../../service/match.service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-match-modal',
@@ -35,7 +36,8 @@ export class MatchModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private modalRef: NzModalRef,
-    private matchService: MatchService
+    private matchService: MatchService,
+    private nzMessage: NzMessageService
   ) {}
 
   ngOnInit(): void {
@@ -81,6 +83,11 @@ export class MatchModalComponent implements OnInit {
   }
 
   submitForm(): void {
+    if(this.validateForm.value["time"].getTime() > this.validateForm.value.rangePickerTime[0].getTime()) {
+      this.nzMessage.create("error", "报名时间晚于赛事开始时间");
+
+      return ;
+    }
     // for (const i in this.validateForm.controls) {
     //   this.validateForm.controls[i].markAsDirty();
     //   this.validateForm.controls[i].updateValueAndValidity();

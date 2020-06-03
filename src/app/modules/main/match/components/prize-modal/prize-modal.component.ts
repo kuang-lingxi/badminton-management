@@ -99,4 +99,8 @@ export class PrizeModalComponent implements OnInit {
     }
   }
 
+  cancel() {
+    this.modalRef.close();
+  }
+
 }

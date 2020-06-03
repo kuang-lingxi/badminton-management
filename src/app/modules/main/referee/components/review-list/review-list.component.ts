@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { ReviewDetailComponent } from '../review-detail/review-detail.component';
 import { RefereeService } from '../../service/referee.service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-review-list',
@@ -25,7 +26,8 @@ export class ReviewListComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private modalService: NzModalService,
-    private refereeService: RefereeService
+    private refereeService: RefereeService,
+    private messageService: NzMessageService
   ) { }
 
   ngOnInit() {
@@ -47,6 +49,11 @@ export class ReviewListComponent implements OnInit {
       nzFooter: null,
       nzComponentParams: {img: img}
     })
+  }
+
+  pass() {
+    this.messageService.create("success", "已通过！");
+    this.reviewList = [];
   }
 
 }

@@ -12,7 +12,8 @@
 
 .logo {
   height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  background: url("/assets/images/logo.jpg") no-repeat;
+  background-size: 100% 32px;
   margin: 16px;
 }
 

@@ -37,6 +37,12 @@ export class LoginComponent implements OnInit {
       ...this.validateForm.value
     }
 
+    if(userMsg.username === 'user1') {
+      this.nzMessageService.create('error', '您没有权限登录后台界面');
+
+      return ;
+    }
+
     this.loginService.login(userMsg.username, userMsg.password, userMsg.remember).subscribe(response => {
       if(response.code === 0) {
         if(response.message.result) {

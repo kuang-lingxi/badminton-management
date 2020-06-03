@@ -53,9 +53,7 @@ export class TeamArrangeComponent implements OnInit {
       status: [this.matchStatus.enrolling],
     });
 
-    this.matchService.getTeamArrange().subscribe(resp => {
-      this.matchData = resp;
-    })
+    this.update();
   }
 
   submitForm(): void {
@@ -86,7 +84,7 @@ export class TeamArrangeComponent implements OnInit {
   }
 
   update() {
-    this.matchService.getArrange().subscribe(resp => {
+    this.matchService.getTeamArrange().subscribe(resp => {
       this.matchData = resp;
     })
   }

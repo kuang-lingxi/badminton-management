@@ -80,7 +80,7 @@ export class MatchListComponent implements OnInit {
   formatMatchStatus(status) {
     switch(status) {
       case this.matchStatus.end: return "已结束";
-      case this.matchStatus.enrolling: return "报名中";
+      case this.matchStatus.enrolling: return "报名截止";
       case this.matchStatus.enrollEnd: return "报名截止";
       case this.matchStatus.matching: return "比赛中";
       case this.matchStatus.numMax: return "人数已满";

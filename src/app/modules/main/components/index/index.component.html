@@ -1,6 +1,8 @@
 <nz-layout class="content">
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-    <div class="logo"></div>
+    <div class="logo">
+      
+    </div>
     <ul 
       nz-menu 
       nzTheme="dark" 
@@ -57,6 +59,7 @@
         [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"
       ></i>
+      <span style="float: right; margin-right: 30px;">欢迎您:{{user}}</span>
     </nz-header>
     <nz-content>
       <div>

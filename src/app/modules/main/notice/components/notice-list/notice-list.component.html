@@ -59,7 +59,7 @@
         <td>{{data.promulgator}}</td>
         <td>{{data.top === 0 ? '否' : '是'}}</td>
         <td>
-          <span class="operate" (click)="edit()">编辑</span>
+          <span class="operate" (click)="edit(data.title, data.content, data.top)">编辑</span>
           <span class="operate">删除</span>
         </td>
       </tr>

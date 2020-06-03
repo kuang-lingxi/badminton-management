@@ -76,6 +76,18 @@ export class EnrollComponent implements OnInit {
         }
       })
     }else {
+      if(this.validateForm.value.schoolNumber == "1234567892") {
+        this.nzMessageService.create('error', '您被禁止参赛，请联系管理员解除!');
+
+        return ;
+      }
+
+      if(this.validateForm.value.schoolNumber === "2000000006") {
+        this.nzMessageService.create("error", "您不符合本次参赛要求");
+
+        return ;
+      }
+
       for (const i in this.validateForm.controls) {
         this.validateForm.controls[i].clearAsyncValidators();
         this.validateForm.controls[i].markAsDirty();
@@ -114,13 +126,16 @@ export class EnrollComponent implements OnInit {
   }
 
   goBack() {
-    const state: any = this.location.getState();
-    if(state.navigationId === 1) {
-      this.location.back();
-      // window.location.href = "http://localhost:4200"
-    }else {
-      this.location.back();
-    }
+    this.nzMessageService.create("success", "报名成功!");
+    setTimeout(() => {
+      const state: any = this.location.getState();
+      if(state.navigationId === 1) {
+        this.location.back();
+        // window.location.href = "http://localhost:4200"
+      }else {
+        this.location.back();
+      }
+    }, 1000);
   }
 
 }

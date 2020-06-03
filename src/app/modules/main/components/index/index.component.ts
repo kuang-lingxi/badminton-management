@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-index',
@@ -9,7 +10,13 @@ export class IndexComponent implements OnInit {
 
   isCollapsed = false;
 
-  constructor() { }
+  user: string;
+
+  constructor(
+    private cookieService: CookieService
+  ) {
+    this.user = this.cookieService.get("username");
+  }
 
   ngOnInit() {
   }
